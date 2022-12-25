@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Animator _animator;
     private bool _jumped;
     private Rigidbody2D _rigidbody2D;
 
     // Start is called before the first frame update
     void Start()
     {
+        _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -20,6 +22,17 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
             _jumped = true;
+        }
+
+        if (_jumped)
+        {
+            _animator.SetBool("Player", false);
+            _animator.SetBool("Jump", true);
+        }
+        else
+        {
+            _animator.SetBool("Jump", false);
+            _animator.SetBool("Player", true);
         }
     }
 
