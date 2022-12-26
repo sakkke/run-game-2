@@ -26,13 +26,11 @@ public class PlayerController : MonoBehaviour
 
         if (_jumped)
         {
-            _animator.SetBool("Player", false);
             _animator.SetBool("Jump", true);
         }
         else
         {
             _animator.SetBool("Jump", false);
-            _animator.SetBool("Player", true);
         }
     }
 
