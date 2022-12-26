@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
-    public static float cameraSpeed = 1;
-    public static float playerJumpPower = 10;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +13,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.position += Vector3.right * Time.deltaTime * GameController.cameraSpeed;
     }
 }
