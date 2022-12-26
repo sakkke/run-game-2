@@ -27,10 +27,16 @@ public class PlayerController : MonoBehaviour
     {
         var halfWidth = _spriteRenderer.sprite.bounds.size.x / 2;
         var PlayerLeft = GameController.ScreenLeft() + halfWidth;
+        var PlayerRight = GameController.ScreenRight() - halfWidth;
+
         transform.position += Vector3.right * Time.deltaTime * GameController.cameraSpeed;
 
         if (transform.position.x < PlayerLeft) {
             transform.position = new Vector2(PlayerLeft, transform.position.y);
+        }
+
+        if (transform.position.x > PlayerRight) {
+            transform.position = new Vector2(PlayerRight, transform.position.y);
         }
 
         if (!_jumping && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
