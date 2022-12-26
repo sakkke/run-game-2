@@ -5,12 +5,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
+    private AudioSource _audioSource;
     private bool _jumping;
     private Rigidbody2D _rigidbody2D;
+    public AudioClip JumpAudioClip;
 
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -21,6 +24,7 @@ public class PlayerController : MonoBehaviour
         if (!_jumping && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
             _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
+            _audioSource.PlayOneShot(JumpAudioClip);
             _jumping = true;
         }
 
