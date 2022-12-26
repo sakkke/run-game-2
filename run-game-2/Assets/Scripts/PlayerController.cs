@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
-    private bool _jumped;
+    private bool _jumping;
     private Rigidbody2D _rigidbody2D;
 
     // Start is called before the first frame update
@@ -18,13 +18,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_jumped && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
+        if (!_jumping && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
             _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
-            _jumped = true;
+            _jumping = true;
         }
 
-        if (_jumped)
+        if (_jumping)
         {
             _animator.SetBool("Jump", true);
         }
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision2D.gameObject.tag == "Plane")
         {
-            _jumped = false;
+            _jumping = false;
         }
     }
 }
