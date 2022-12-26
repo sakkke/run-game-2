@@ -40,6 +40,16 @@ public class PlayerController : MonoBehaviour
             _jumping = true;
         }
 
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position = new Vector2(transform.position.x - GameController.playerSpeed, transform.position.y);
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position = new Vector2(transform.position.x + GameController.playerSpeed, transform.position.y);
+        }
+
         if (_jumping)
         {
             _animator.SetBool("Jump", true);

@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
 
     public float CurrentPlaneX;
     public static float planeWidth = 20;
+    public static float playerSpeed = 0.1f;
     public static float playerJumpPower = 10;
 
     // Start is called before the first frame update
