@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(PlayerRight, transform.position.y);
         }
 
-        if (!_jumping && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
+        if (!_jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetMouseButtonDown(0)))
         {
             _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
             _audioSource.PlayOneShot(JumpAudioClip);
