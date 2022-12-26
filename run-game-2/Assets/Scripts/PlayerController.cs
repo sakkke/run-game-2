@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
     private AudioSource _audioSource;
+    private GameController _gameController;
     private bool _jumping;
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
+        _gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -44,6 +46,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animator.SetBool("Jump", false);
+        }
+
+        if (_gameController.CurrentPlaneLeft < transform.position.x)
+        {
+            _gameController.NextPlane();
         }
     }
 
