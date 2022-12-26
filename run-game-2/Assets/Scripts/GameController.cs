@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     }
 
     public float CurrentPlaneX;
+    public static float abovePlane = 1.5f;
     public static float planeWidth = 20;
     public static float playerSpeed = 0.1f;
     public static float playerJumpPower = 10;
@@ -30,6 +31,11 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game over!");
     }
 
     public GameObject NextPlane()
