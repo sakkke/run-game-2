@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audioSource;
     private bool _jumping;
     private Rigidbody2D _rigidbody2D;
+    private SpriteRenderer _spriteRenderer;
     public AudioClip JumpAudioClip;
 
     // Start is called before the first frame update
@@ -16,11 +17,19 @@ public class PlayerController : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        var halfWidth = _spriteRenderer.sprite.bounds.size.x / 2;
+        var PlayerLeft = GameController.ScreenLeft() + halfWidth;
+
+        if (transform.position.x < PlayerLeft) {
+            transform.position = new Vector2(PlayerLeft, transform.position.y);
+        }
+
         if (!_jumping && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
             _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
