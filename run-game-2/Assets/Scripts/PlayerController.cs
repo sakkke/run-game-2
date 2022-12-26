@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         var halfWidth = _spriteRenderer.sprite.bounds.size.x / 2;
         var PlayerLeft = GameController.ScreenLeft() + halfWidth;
+        transform.position += Vector3.right * Time.deltaTime * GameController.cameraSpeed;
 
         if (transform.position.x < PlayerLeft) {
             transform.position = new Vector2(PlayerLeft, transform.position.y);
