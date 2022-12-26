@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         _gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
