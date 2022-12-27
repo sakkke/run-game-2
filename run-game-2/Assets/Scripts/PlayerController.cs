@@ -29,7 +29,10 @@ public class PlayerController : MonoBehaviour
         var PlayerLeft = GameController.ScreenLeft() + halfWidth;
         var PlayerRight = GameController.ScreenRight() - halfWidth;
 
-        transform.position += Vector3.right * Time.deltaTime * GameController.cameraSpeed;
+        if (!Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position += Vector3.right * Time.deltaTime * GameController.cameraSpeed;
+        }
 
         if (transform.position.x < PlayerLeft) {
             transform.position = new Vector2(PlayerLeft, transform.position.y);
