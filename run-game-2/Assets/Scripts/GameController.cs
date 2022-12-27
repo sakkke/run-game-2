@@ -5,7 +5,10 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject Plane;
-    public static float cameraSpeed = 1;
+
+    // '%.3f' % 1.618 ** 3
+    public static float cameraSpeed = 4.236f;
+
     public float CurrentPlaneLeft
     {
         get
@@ -19,7 +22,9 @@ public class GameController : MonoBehaviour
     public static float abovePlane = 1.5f;
     public static float planeWidth = 20;
     public static float playerSpeed = 0.1f;
-    public static float playerJumpPower = 10;
+
+    // '%.3f' % 1.618 ** 4
+    public static float playerJumpPower = 6.854f;
 
     // Start is called before the first frame update
     void Start()
