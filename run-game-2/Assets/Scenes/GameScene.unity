@@ -683,5 +683,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plane
       objectReference: {fileID: 0}
+    - target: {fileID: 4136981094631948099, guid: 4420fbbc97b02ac6e9edd1b3d054a99c, type: 3}
+      propertyPath: CanSpawn
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4420fbbc97b02ac6e9edd1b3d054a99c, type: 3}
