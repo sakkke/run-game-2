@@ -171,11 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2cf0c9d3ce6739f92eae3340207e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 4
+  _distance: 6
   _min: 1
   _max: 1
   _rate: 1
-  _vectorAx: -15
+  _vectorAx: -9
   _vectorAy: 0
-  _vectorBx: 15
+  _vectorBx: 9
   _vectorBy: 0
