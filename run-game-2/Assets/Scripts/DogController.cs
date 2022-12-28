@@ -15,12 +15,7 @@ public class DogController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var halfWidth = GameController.planeWidth / 2;
 
-        if (transform.position.x + halfWidth < GameController.ScreenLeft())
-        {
-            Destroy(gameObject);
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision2D)
