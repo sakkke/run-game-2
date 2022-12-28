@@ -332,6 +332,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canSpawn: 1
   _dog: {fileID: 7369080615593204185, guid: 9a868ff0837222a978e9cca004ad4da2, type: 3}
+  _barriers:
+  - {fileID: 3726064046952665530, guid: 9a868ff0837222a978e9cca004ad4da2, type: 3}
 --- !u!1 &1806297253145757585
 GameObject:
   m_ObjectHideFlags: 0

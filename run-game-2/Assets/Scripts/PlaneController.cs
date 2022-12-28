@@ -7,10 +7,10 @@ public class PlaneController : MonoBehaviour
     [SerializeField]
     bool _canSpawn;
 
-    [SerializeField]
-    GameObject _dog;
-
     GameController _gameController;
+
+    [SerializeField]
+    Barrier[] _barriers;
 
     // Start is called before the first frame update
     void Start()
@@ -19,29 +19,9 @@ public class PlaneController : MonoBehaviour
 
         if (_canSpawn)
         {
-            var left = _gameController.CurrentPlaneX - 15;
-            var right = _gameController.CurrentPlaneX + 15;
-
-            for (var i = 0;; i++)
+            foreach (var barrier in _barriers)
             {
-                if (i > 10)
-                {
-                    Debug.Log("Sprite didn't spawn.");
-                    break;
-                }
-
-                var x = Random.Range(left, right);
-                var hitted = !!Physics2D.OverlapBox(new Vector2(x, GameController.abovePlane + (GameController.ScreenTop() - GameController.abovePlane) / 2), new Vector2(4, GameController.ScreenTop() - GameController.abovePlane), 0);
-
-                if (!hitted)
-                {
-                    Instantiate(_dog, new Vector2(x, GameController.abovePlane), Quaternion.identity);
-                    break;
-                }
-                else
-                {
-                    Debug.Log("Expect sprite conflicts.");
-                }
+                barrier.Spawn(_gameController);
             }
         }
     }

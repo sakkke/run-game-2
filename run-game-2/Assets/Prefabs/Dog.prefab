@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2172368319405381195}
   - component: {fileID: 3864718740417280536}
   - component: {fileID: 5104985351519220934}
+  - component: {fileID: 3726064046952665530}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -158,3 +159,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd99b09508ce706a99417735132d028b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3726064046952665530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7369080615593204185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2cf0c9d3ce6739f92eae3340207e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distance: 4
+  _min: 1
+  _max: 1
+  _rate: 1
+  _vectorAx: -15
+  _vectorAy: 0
+  _vectorBx: 15
+  _vectorBy: 0
