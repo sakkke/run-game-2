@@ -7,6 +7,9 @@ public class Barrier : MonoBehaviour
     GameController _gameController;
 
     [SerializeField]
+    bool _canCollision;
+
+    [SerializeField]
     float _distance;
 
     [SerializeField]
@@ -61,7 +64,7 @@ public class Barrier : MonoBehaviour
 
                 var hitted = !!Physics2D.OverlapBox(new Vector2(gameController.CurrentPlaneX + (_vectorAx + _vectorBx) / 2, GameController.abovePlane + (_vectorAy + _vectorBy) / 2), new Vector2(_vectorBx + _distance, _vectorBy), 0);
 
-                if (!hitted)
+                if (!hitted || _canCollision)
                 {
                     Instantiate(gameObject, new Vector2(Random.Range(left, right), Random.Range(bottom, top)), Quaternion.identity);
                 }
