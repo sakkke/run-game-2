@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Animator _animator;
-    private AudioSource _audioSource;
-    private GameController _gameController;
-    private bool _jumping;
-    private Rigidbody2D _rigidbody2D;
-    private SpriteRenderer _spriteRenderer;
-    public AudioClip JumpAudioClip;
+    Animator _animator;
+    AudioSource _audioSource;
+    GameController _gameController;
+
+    [SerializeField]
+    AudioClip _jumpAudioClip;
+    bool _jumping;
+    Rigidbody2D _rigidbody2D;
+    SpriteRenderer _spriteRenderer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour
         if (!_jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetMouseButtonDown(0)))
         {
             _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
-            _audioSource.PlayOneShot(JumpAudioClip);
+            _audioSource.PlayOneShot(_jumpAudioClip);
             _jumping = true;
         }
 

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class PlaneController : MonoBehaviour
 {
-    private GameController _gameController;
-    public bool CanSpawn;
-    public GameObject Dog;
+    [SerializeField]
+    bool _canSpawn;
+
+    [SerializeField]
+    GameObject _dog;
+
+    GameController _gameController;
 
     // Start is called before the first frame update
     void Start()
     {
         _gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 
-        if (CanSpawn)
+        if (_canSpawn)
         {
             var left = _gameController.CurrentPlaneX - 15;
             var right = _gameController.CurrentPlaneX + 15;
@@ -31,7 +35,7 @@ public class PlaneController : MonoBehaviour
 
                 if (!hitted)
                 {
-                    Instantiate(Dog, new Vector2(x, GameController.abovePlane), Quaternion.identity);
+                    Instantiate(_dog, new Vector2(x, GameController.abovePlane), Quaternion.identity);
                     break;
                 }
                 else

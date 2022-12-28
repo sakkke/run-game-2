@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0fc49259a3a8b4c8609df86e66ae36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpAudioClip: {fileID: 8300000, guid: 8d235bce91a4c9a598cd43b17540d59f, type: 3}
+  _jumpAudioClip: {fileID: 8300000, guid: 8d235bce91a4c9a598cd43b17540d59f, type: 3}
 --- !u!82 &252234064
 AudioSource:
   m_ObjectHideFlags: 0
@@ -685,6 +685,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4136981094631948099, guid: 4420fbbc97b02ac6e9edd1b3d054a99c, type: 3}
       propertyPath: CanSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136981094631948099, guid: 4420fbbc97b02ac6e9edd1b3d054a99c, type: 3}
+      propertyPath: _canSpawn
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

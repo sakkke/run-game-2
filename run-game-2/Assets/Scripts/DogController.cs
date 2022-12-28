@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DogController : MonoBehaviour
 {
-    private GameController _gameController;
+    GameController _gameController;
 
     // Start is called before the first frame update
     void Start()
