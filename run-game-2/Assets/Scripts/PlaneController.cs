@@ -15,10 +15,30 @@ public class PlaneController : MonoBehaviour
 
         if (CanSpawn)
         {
-            var left = _gameController.CurrentPlaneX - 10;
-            var right = _gameController.CurrentPlaneX + 10;
-            var x = Random.Range(left, right);
-            Instantiate(Dog, new Vector2(x, GameController.abovePlane), Quaternion.identity);
+            var left = _gameController.CurrentPlaneX - 15;
+            var right = _gameController.CurrentPlaneX + 15;
+
+            for (var i = 0;; i++)
+            {
+                if (i > 10)
+                {
+                    Debug.Log("Sprite didn't spawn.");
+                    break;
+                }
+
+                var x = Random.Range(left, right);
+                var hitted = !!Physics2D.OverlapBox(new Vector2(x, GameController.abovePlane + (GameController.ScreenTop() - GameController.abovePlane) / 2), new Vector2(4, GameController.ScreenTop() - GameController.abovePlane), 0);
+
+                if (!hitted)
+                {
+                    Instantiate(Dog, new Vector2(x, GameController.abovePlane), Quaternion.identity);
+                    break;
+                }
+                else
+                {
+                    Debug.Log("Expect sprite conflicts.");
+                }
+            }
         }
     }
 

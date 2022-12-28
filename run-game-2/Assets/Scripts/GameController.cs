@@ -59,4 +59,9 @@ public class GameController : MonoBehaviour
     {
         return Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x;
     }
+
+    public static float ScreenTop()
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y;
+    }
 }
