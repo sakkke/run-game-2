@@ -28,10 +28,11 @@ public class GameController : MonoBehaviour
 
     public static float planeWidth = 20;
     public static float playerDownSpeed = 0.2f;
-    public static float playerSpeed = 0.1f;
 
     // '%.3f' % 1.618 ** 4
     public static float playerJumpPower = 6.854f;
+
+    public static float playerSpeed = 0.1f;
 
     // Start is called before the first frame update
     void Start()
