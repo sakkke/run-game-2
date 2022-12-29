@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public AudioSource AudioSrc { get; set; }
     public GameObject Plane;
 
     // '%.3f' % 1.618 ** 3
@@ -33,7 +34,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        AudioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

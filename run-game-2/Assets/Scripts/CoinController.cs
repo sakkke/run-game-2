@@ -6,6 +6,9 @@ public class CoinController : MonoBehaviour
 {
     GameController _gameController;
 
+    [SerializeField]
+    AudioClip _triggerAudioClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,7 @@ public class CoinController : MonoBehaviour
         {
             Destroy(gameObject);
             _gameController.IncreaseScore(0);
+            _gameController.AudioSrc.PlayOneShot(_triggerAudioClip);
         }
     }
 }
