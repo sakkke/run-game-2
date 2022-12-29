@@ -1,4 +1,4 @@
-.PHONY: all build clean
+.PHONY: all build clean tokei
 
 all: build
 
@@ -7,3 +7,6 @@ build: clean
 
 clean:
 	rm -rf public/unity-build
+
+tokei:
+	tokei pages run-game-2/Assets/Scripts run-game-2/Assets/Plugins/WebGL
