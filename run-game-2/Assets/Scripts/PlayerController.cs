@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     AudioClip _jumpAudioClip;
+
     bool _jumping;
     Rigidbody2D _rigidbody2D;
     SpriteRenderer _spriteRenderer;
