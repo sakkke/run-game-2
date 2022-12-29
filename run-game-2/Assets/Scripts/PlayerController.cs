@@ -29,6 +29,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _gameController.Toggle();
+        }
+
+        if (_gameController.IsPaused)
+        {
+            return;
+        }
+
         var halfWidth = _spriteRenderer.sprite.bounds.size.x / 2;
         var PlayerLeft = GameController.ScreenLeft() + halfWidth;
         var PlayerRight = GameController.ScreenRight() - halfWidth;

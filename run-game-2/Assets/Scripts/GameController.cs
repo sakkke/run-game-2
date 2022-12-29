@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public AudioSource AudioSrc { get; set; }
+    public bool IsPaused { get; set; }
     public GameObject Plane;
 
     // '%.3f' % 1.618 ** 3
@@ -60,6 +61,20 @@ public class GameController : MonoBehaviour
         return result;
     }
 
+    public void Pause()
+    {
+        AudioSrc.Pause();
+        Time.timeScale = 0;
+        IsPaused = true;
+    }
+
+    public void Resume()
+    {
+        AudioSrc.Play();
+        Time.timeScale = 1;
+        IsPaused = false;
+    }
+
     public static float ScreenLeft()
     {
         return Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x;
@@ -73,5 +88,17 @@ public class GameController : MonoBehaviour
     public static float ScreenTop()
     {
         return Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y;
+    }
+
+    public void Toggle()
+    {
+        if (IsPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
     }
 }

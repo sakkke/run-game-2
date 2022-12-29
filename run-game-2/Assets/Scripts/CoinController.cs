@@ -18,6 +18,11 @@ public class CoinController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_gameController.IsPaused)
+        {
+            return;
+        }
+
         transform.Rotate(0, GameController.coinRotateSpeed, 0);
     }
 
