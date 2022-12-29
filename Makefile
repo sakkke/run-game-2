@@ -1,4 +1,4 @@
-.PHONY: all build clean tokei
+.PHONY: all build clean start tokei
 
 all: build
 
@@ -7,6 +7,10 @@ build: clean
 
 clean:
 	rm -rf public/unity-build
+
+start:
+	npm run build
+	npm start
 
 tokei:
 	tokei pages run-game-2/Assets/Scripts run-game-2/Assets/Plugins/WebGL
