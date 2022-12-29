@@ -1,4 +1,4 @@
-.PHONY: all build clean start tokei
+.PHONY: all build clean dev start tokei
 
 all: build
 
@@ -7,6 +7,9 @@ build: clean
 
 clean:
 	rm -rf public/unity-build
+
+dev:
+	watchexec -r -s SIGINT -w pages -w run-game-2/Build make start
 
 start:
 	npm run build
