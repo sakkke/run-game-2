@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour
             _jumping = true;
         }
 
+        if (_jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y - GameController.playerDownSpeed);
+        }
+
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H))
         {
             transform.position = new Vector2(transform.position.x - GameController.playerSpeed, transform.position.y);
