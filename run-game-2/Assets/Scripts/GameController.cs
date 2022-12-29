@@ -20,6 +20,10 @@ public class GameController : MonoBehaviour
 
     public float CurrentPlaneX;
     public static float abovePlane = 1.5f;
+
+    // '%.3f' % 1.618 ** 3
+    public static float coinRotateSpeed = 4.236f;
+
     public static float planeWidth = 20;
     public static float playerSpeed = 0.1f;
 
