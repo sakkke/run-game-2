@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
     public static float playerJumpPower = 6.854f;
 
     public static float playerSpeed = 0.1f;
+    public static float playerSquattingScale = 0.5f;
 
     // Start is called before the first frame update
     void Start()

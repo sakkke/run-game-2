@@ -68,6 +68,15 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(transform.position.x, transform.position.y - GameController.playerDownSpeed);
         }
 
+        if (!_jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
+        {
+            transform.localScale = new Vector2(transform.localScale.x, GameController.playerSquattingScale);
+        }
+        else
+        {
+            transform.localScale = new Vector2(transform.localScale.x, 1);
+        }
+
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H))
         {
             transform.position = new Vector2(transform.position.x - GameController.playerSpeed, transform.position.y);
