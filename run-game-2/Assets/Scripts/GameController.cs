@@ -42,6 +42,11 @@ public class GameController : MonoBehaviour
 
     }
 
+    public void IncreaseScore(int score)
+    {
+        Debug.Log(score);
+    }
+
     public void GameOver()
     {
         Debug.Log("Game over!");
