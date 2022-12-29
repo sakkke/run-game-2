@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector2(transform.localScale.x, GameController.playerSquattingScale);
         }
-        else
+        else if (!_jumping)
         {
             transform.localScale = new Vector2(transform.localScale.x, 1);
         }
