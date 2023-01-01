@@ -94,14 +94,16 @@ export default function Home() {
       </> : scene === Scene.Game ? <>
         <Modal
           isOpen={isGameOver}
-          className="-translate-y-1/2 absolute bg-stone-900/75 gap-8 grid h-fit left-8 p-8 place-items-center right-8 top-1/2"
+          className="-translate-y-1/2 absolute bg-stone-900/75 grid h-fit left-8 p-8 place-items-center right-8 top-1/2"
         >
-          <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>Game Over!</h2>
-          <button className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50`}>Restart</button>
-          <button
-            className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50`}
-            onClick={loadMainMenu}
-          >Main Menu</button>
+          <div className="flex flex-col gap-8 items-center">
+            <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>Game Over!</h2>
+            <button className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}>Restart</button>
+            <button
+              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              onClick={loadMainMenu}
+            >Main Menu</button>
+          </div>
         </Modal>
       </> : scene === Scene.Multi && <>
           <h2>Multi</h2>
