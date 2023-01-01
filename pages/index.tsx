@@ -20,7 +20,7 @@ export default function Home() {
     setIsGameOver(true)
   }
 
-  const { unityProvider, loadingProgression, isLoaded, addEventListener, removeEventListener } = useUnityContext({
+  const { unityProvider, loadingProgression, isLoaded, sendMessage, addEventListener, removeEventListener } = useUnityContext({
     loaderUrl: 'unity-build/Build.loader.js',
     dataUrl: 'unity-build/Build.data',
     frameworkUrl: 'unity-build/Build.framework.js',
@@ -33,10 +33,12 @@ export default function Home() {
   })
 
   const loadMainMenu = () => {
+    sendMessage('Game Controller', 'LoadEmpty')
     setScene(Scene.MainMenu)
   }
 
   const loadGame = () => {
+    sendMessage('Game Controller', 'LoadGame')
     setScene(Scene.Game)
   }
 
