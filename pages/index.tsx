@@ -1,15 +1,28 @@
 import Head from 'next/head'
-// import { Inter } from '@next/font/google'
+import { useEffect, useState } from 'react'
+import Modal from 'react-modal'
+import { Inter } from '@next/font/google'
 import { Unity, useUnityContext } from 'react-unity-webgl'
 
-// const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const { unityProvider, loadingProgression, isLoaded } = useUnityContext({
+  const [isGameOver, setIsGameOver] = useState(false)
+
+  const handleGameOver = () => {
+    setIsGameOver(true)
+  }
+
+  const { unityProvider, loadingProgression, isLoaded, addEventListener, removeEventListener } = useUnityContext({
     loaderUrl: 'unity-build/Build.loader.js',
     dataUrl: 'unity-build/Build.data',
     frameworkUrl: 'unity-build/Build.framework.js',
     codeUrl: 'unity-build/Build.wasm'
+  })
+
+  useEffect(() => {
+    addEventListener('GameOver', handleGameOver)
+    return () => void removeEventListener('GameOver', handleGameOver)
   })
 
   return (
@@ -45,6 +58,13 @@ export default function Home() {
           className="max-h-screen mt-auto"
         />
       </main>
+      <Modal
+        isOpen={isGameOver}
+        className="-translate-y-1/2 absolute bg-stone-900/75 gap-8 grid h-fit left-8 p-8 place-items-center right-8 top-1/2"
+      >
+        <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>Game Over!</h2>
+        <button className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50`}>Restart</button>
+      </Modal>
     </>
   )
 }

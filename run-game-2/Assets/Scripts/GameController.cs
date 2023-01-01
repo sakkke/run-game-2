@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        Exports.GameOver();
         Debug.Log("Game over!");
     }
 
