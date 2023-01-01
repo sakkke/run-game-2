@@ -6,8 +6,15 @@ import { Unity, useUnityContext } from 'react-unity-webgl'
 
 const inter = Inter({ subsets: ['latin'] })
 
+enum Scene {
+  MainMenu,
+  Game,
+  Multi,
+}
+
 export default function Home() {
   const [isGameOver, setIsGameOver] = useState(false)
+  const [scene, setScene] = useState(Scene.MainMenu)
 
   const handleGameOver = () => {
     setIsGameOver(true)
@@ -24,6 +31,18 @@ export default function Home() {
     addEventListener('GameOver', handleGameOver)
     return () => void removeEventListener('GameOver', handleGameOver)
   })
+
+  const loadMainMenu = () => {
+    setScene(Scene.MainMenu)
+  }
+
+  const loadGame = () => {
+    setScene(Scene.Game)
+  }
+
+  const loadMulti = () => {
+    setScene(Scene.Multi)
+  }
 
   return (
     <>
@@ -58,13 +77,35 @@ export default function Home() {
           className="max-h-screen mt-auto"
         />
       </main>
-      <Modal
-        isOpen={isGameOver}
-        className="-translate-y-1/2 absolute bg-stone-900/75 gap-8 grid h-fit left-8 p-8 place-items-center right-8 top-1/2"
-      >
-        <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>Game Over!</h2>
-        <button className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50`}>Restart</button>
-      </Modal>
+      {scene === Scene.MainMenu ? <>
+        <div className="bg-stone-900 fixed grid h-screen place-items-center top-0 w-screen">
+          <div className="flex flex-col gap-8 items-center">
+            <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>Run Game</h1>
+            <button
+              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              onClick={loadGame}
+            >Play</button>
+            <button
+              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              onClick={loadMulti}
+            >Multi</button>
+          </div>
+        </div>
+      </> : scene === Scene.Game ? <>
+        <Modal
+          isOpen={isGameOver}
+          className="-translate-y-1/2 absolute bg-stone-900/75 gap-8 grid h-fit left-8 p-8 place-items-center right-8 top-1/2"
+        >
+          <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>Game Over!</h2>
+          <button className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50`}>Restart</button>
+          <button
+            className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50`}
+            onClick={loadMainMenu}
+          >Main Menu</button>
+        </Modal>
+      </> : scene === Scene.Multi && <>
+          <h2>Multi</h2>
+      </>}
     </>
   )
 }
