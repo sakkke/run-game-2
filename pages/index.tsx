@@ -46,6 +46,11 @@ export default function Home() {
     setScene(Scene.Multi)
   }
 
+  const restartGame = () => {
+    setIsGameOver(false)
+    loadGame()
+  }
+
   const exitGame = () => {
     loadMainMenu()
     setIsGameOver(false)
@@ -105,7 +110,10 @@ export default function Home() {
         >
           <div className="flex flex-col gap-8 items-center">
             <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>Game Over!</h2>
-            <button className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}>Restart</button>
+            <button
+              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              onClick={restartGame}
+            >Restart</button>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={exitGame}
