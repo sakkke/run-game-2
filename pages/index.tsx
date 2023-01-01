@@ -46,6 +46,11 @@ export default function Home() {
     setScene(Scene.Multi)
   }
 
+  const exitGame = () => {
+    loadMainMenu()
+    setIsGameOver(false)
+  }
+
   return (
     <>
       <style>
@@ -103,7 +108,7 @@ export default function Home() {
             <button className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}>Restart</button>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
-              onClick={loadMainMenu}
+              onClick={exitGame}
             >Main Menu</button>
           </div>
         </Modal>
