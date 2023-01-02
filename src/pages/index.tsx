@@ -10,6 +10,7 @@ enum Scene {
   MainMenu,
   Game,
   Multi,
+  Settings,
 }
 
 export default function Home() {
@@ -44,6 +45,10 @@ export default function Home() {
 
   const loadMulti = () => {
     setScene(Scene.Multi)
+  }
+
+  const loadSettings = () => {
+    setScene(Scene.Settings)
   }
 
   const restartGame = () => {
@@ -101,6 +106,10 @@ export default function Home() {
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadMulti}
             >Multi</button>
+            <button
+              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              onClick={loadSettings}
+            >Settings</button>
           </div>
         </div>
       </> : scene === Scene.Game ? <>
@@ -120,8 +129,10 @@ export default function Home() {
             >Main Menu</button>
           </div>
         </Modal>
-      </> : scene === Scene.Multi && <>
+      </> : scene === Scene.Multi ? <>
         <h2>Multi</h2>
+      </> : scene === Scene.Settings && <>
+        <h2>Settings</h2>
       </>}
     </>
   )
