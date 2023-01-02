@@ -121,7 +121,7 @@ export default function Home() {
           </div>
         </Modal>
       </> : scene === Scene.Multi && <>
-          <h2>Multi</h2>
+        <h2>Multi</h2>
       </>}
     </>
   )
