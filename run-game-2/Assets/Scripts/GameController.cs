@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public AudioSource AudioSrc { get; set; }
+    public bool IsGameOver { get; set; }
     public bool IsPaused { get; set; }
     public GameObject Plane;
 
@@ -40,6 +41,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         AudioSrc = GetComponent<AudioSource>();
+        AudioSrc.Play();
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -55,6 +58,9 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        IsGameOver = true;
+        AudioSrc.Pause();
+        Time.timeScale = 0;
         Exports.GameOver();
         Debug.Log("Game over!");
     }
