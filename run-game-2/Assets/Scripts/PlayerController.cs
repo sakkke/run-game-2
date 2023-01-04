@@ -100,11 +100,6 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("Jump", false);
         }
-
-        if (_gameController.CurrentPlaneLeft < transform.position.x)
-        {
-            _gameController.NextPlane();
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision2D)
