@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 enum Scene {
   MainMenu,
   Game,
-  Multi,
+  Multiplayer,
   Settings,
 }
 
@@ -156,8 +156,8 @@ export default function Home() {
     setScene(Scene.Game)
   }
 
-  const loadMulti = () => {
-    setScene(Scene.Multi)
+  const loadMultiplayer = () => {
+    setScene(Scene.Multiplayer)
   }
 
   const loadSettings = () => {
@@ -217,8 +217,8 @@ export default function Home() {
             >Play</button>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
-              onClick={loadMulti}
-            >Multi</button>
+              onClick={loadMultiplayer}
+            >Multiplayer</button>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadSettings}
@@ -242,8 +242,8 @@ export default function Home() {
             >Main Menu</button>
           </div>
         </Modal>
-      </> : scene === Scene.Multi ? <>
-        <h2>Multi</h2>
+      </> : scene === Scene.Multiplayer ? <>
+        <h2>Multiplayer</h2>
       </> : scene === Scene.Settings && <>
         <div className="bg-stone-900 fixed grid h-screen overflow-y-scroll p-8 place-items-center top-0 w-screen">
           <div className="flex flex-col gap-8 items-center">
