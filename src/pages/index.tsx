@@ -1,8 +1,9 @@
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { Inter } from '@next/font/google'
 import { Unity, useUnityContext } from 'react-unity-webgl'
+import type { ChangeEvent } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,13 +14,120 @@ enum Scene {
   Settings,
 }
 
+interface ISettingsParams {
+  cameraSpeed: number
+  coinRotateSpeed: number
+  gravityX: number
+  gravityY: number
+  gravityZ: number
+  playerDownSpeed: number
+  playerJumpPower: number
+  playerSpeed: number
+  playerSquattingScale: number
+}
+
+class SettingsParams implements ISettingsParams {
+  cameraSpeed: number
+  coinRotateSpeed: number
+  gravityX: number
+  gravityY: number
+  gravityZ: number
+  playerDownSpeed: number
+  playerJumpPower: number
+  playerSpeed: number
+  playerSquattingScale: number
+
+  constructor () {
+    this.cameraSpeed = 0
+    this.coinRotateSpeed = 0
+    this.gravityX = 0
+    this.gravityY = 0
+    this.gravityZ = 0
+    this.playerDownSpeed = 0
+    this.playerJumpPower = 0
+    this.playerSpeed = 0
+    this.playerSquattingScale = 0
+  }
+}
+
 export default function Home() {
   const [isGameOver, setIsGameOver] = useState(false)
   const [scene, setScene] = useState(Scene.MainMenu)
 
+  const [settingsParams, setSettingsParams] = useState(new SettingsParams())
+
+  const [cameraSpeed, setCameraSpeed] = useState(settingsParams.cameraSpeed)
+  const [coinRotateSpeed, setCoinRotateSpeed] = useState(settingsParams.coinRotateSpeed)
+  const [gravityX, setGravityX] = useState(settingsParams.gravityX)
+  const [gravityY, setGravityY] = useState(settingsParams.gravityY)
+  const [gravityZ, setGravityZ] = useState(settingsParams.gravityZ)
+  const [playerDownSpeed, setPlayerDownSpeed] = useState(settingsParams.playerDownSpeed)
+  const [playerJumpPower, setPlayerJumpPower] = useState(settingsParams.playerJumpPower)
+  const [playerSpeed, setPlayerSpeed] = useState(settingsParams.playerSpeed)
+  const [playerSquattingScale, setPlayerSquattingScale] = useState(settingsParams.playerSquattingScale)
+
   const handleGameOver = () => {
     setIsGameOver(true)
   }
+
+  const updateSettingsParams = (s: ISettingsParams) => {
+    setSettingsParams(oldSettingsParams => ({ ...oldSettingsParams, ...s }))
+
+    setCameraSpeed(s.cameraSpeed)
+    setCoinRotateSpeed(s.coinRotateSpeed)
+    setGravityX(s.gravityX)
+    setGravityY(s.gravityY)
+    setGravityZ(s.gravityZ)
+    setPlayerDownSpeed(s.playerDownSpeed)
+    setPlayerJumpPower(s.playerJumpPower)
+    setPlayerSpeed(s.playerSpeed)
+    setPlayerSquattingScale(s.playerSquattingScale)
+  }
+
+  const applyDefaultSettingsParams = () => {
+    const defaultJson = localStorage.getItem('defaultSettingsParams')!
+    const defaultSettingsParams: ISettingsParams = JSON.parse(defaultJson)
+
+    updateSettingsParams(defaultSettingsParams)
+  }
+
+  const applyLocalSettingsParams = () => {
+    const json = JSON.stringify(settingsParams)
+    const localJson = localStorage.getItem('settingsParams')!
+    const localSettingsParams: ISettingsParams = JSON.parse(localJson)
+
+    updateSettingsParams(localSettingsParams)
+  }
+
+  const applySettings = () => {
+    const newSettingsParams: ISettingsParams = {
+      cameraSpeed,
+      coinRotateSpeed,
+      gravityX,
+      gravityY,
+      gravityZ,
+      playerDownSpeed,
+      playerJumpPower,
+      playerSpeed,
+      playerSquattingScale,
+    }
+
+    const newJson = JSON.stringify(newSettingsParams)
+    localStorage.setItem('settingsParams', newJson)
+  }
+
+  const handleSettingsParams = useCallback((json: string) => {
+    const res: ISettingsParams = JSON.parse(json)
+
+    if (localStorage.getItem('defaultSettingsParams') === null) {
+      localStorage.setItem('defaultSettingsParams', json)
+      localStorage.setItem('settingsParams', json)
+    }
+
+    updateSettingsParams(res)
+    applyDefaultSettingsParams()
+    applyLocalSettingsParams()
+  }, [])
 
   const { unityProvider, loadingProgression, isLoaded, sendMessage, addEventListener, removeEventListener } = useUnityContext({
     loaderUrl: 'unity-build/Build.loader.js',
@@ -32,6 +140,11 @@ export default function Home() {
     addEventListener('GameOver', handleGameOver)
     return () => void removeEventListener('GameOver', handleGameOver)
   })
+
+  useEffect(() => {
+    addEventListener('SendSettingsParams', handleSettingsParams)
+    return () => void removeEventListener('SendSettingsParams', handleSettingsParams)
+  }, [addEventListener, removeEventListener, handleSettingsParams])
 
   const loadMainMenu = () => {
     sendMessage('Game Controller', 'LoadEmpty')
@@ -132,7 +245,97 @@ export default function Home() {
       </> : scene === Scene.Multi ? <>
         <h2>Multi</h2>
       </> : scene === Scene.Settings && <>
-        <h2>Settings</h2>
+        <div className="bg-stone-900 fixed grid h-screen overflow-y-scroll p-8 place-items-center top-0 w-screen">
+          <div className="flex flex-col gap-8 items-center">
+            <h2 className={`${inter.className} font-black text-2xl text-stone-50`}>Settings</h2>
+            <label className={`${inter.className} text-stone-50`}>
+              Gravity X-axis: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setGravityX(+e.target.value)}
+                type="text"
+                value={gravityX}
+              />
+            </label>
+            <label className={`${inter.className} text-stone-50`}>
+              Gravity Y-axis: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setGravityY(+e.target.value)}
+                type="text"
+                value={gravityY}
+              />
+            </label>
+            <label className={`${inter.className} text-stone-50`}>
+              Gravity Z-axis: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setGravityZ(+e.target.value)}
+                type="text"
+                value={gravityZ}
+              />
+            </label>
+            <label className={`${inter.className} text-stone-50`}>
+              Camera Speed: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setCameraSpeed(+e.target.value)}
+                type="text"
+                value={cameraSpeed}
+              />
+            </label>
+            <label className={`${inter.className} text-stone-50`}>
+              Coin Rotate Speed: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setCoinRotateSpeed(+e.target.value)}
+                type="text"
+                value={coinRotateSpeed}
+              />
+            </label>
+            <label className={`${inter.className} text-stone-50`}>
+              Player Down Speed: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setPlayerDownSpeed(+e.target.value)}
+                type="text"
+                value={playerDownSpeed}
+              />
+            </label>
+            <label className={`${inter.className} text-stone-50`}>
+              Player Jump Power: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setPlayerJumpPower(+e.target.value)}
+                type="text"
+                value={playerJumpPower}
+              />
+            </label>
+            <label className={`${inter.className} text-stone-50`}>
+              Player Speed: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setPlayerSpeed(+e.target.value)}
+                type="text"
+                value={playerSpeed}
+              />
+            </label>
+            <label className={`${inter.className} text-stone-50`}>
+              Player Squatting Scale: <input
+                className="bg-transparent border-b border-b-blue-500 text-right"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => void setPlayerSquattingScale(+e.target.value)}
+                type="text"
+                value={playerSquattingScale}
+              />
+            </label>
+            <div className="flex gap-8 w-full">
+              <button
+                className={`${inter.className} bg-green-500 font-bold min-h-12 p-4 rounded-full text-green-50 w-full`}
+                onClick={applySettings}
+              >Save & Apply</button>
+              <button
+                className={`${inter.className} bg-red-500 font-bold min-h-12 p-4 rounded-full text-red-50 w-full`}
+                onClick={applyDefaultSettingsParams}
+              >Reset to default</button>
+            </div>
+            <button
+              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-full`}
+              onClick={loadMainMenu}
+            >Main Menu</button>
+          </div>
+        </div>
       </>}
     </>
   )

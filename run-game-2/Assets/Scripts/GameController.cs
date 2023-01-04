@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour
         AudioSrc = GetComponent<AudioSource>();
         AudioSrc.Play();
         Time.timeScale = 1;
+        SendSettingsParams();
+        LoadLocalSettingsParams();
     }
 
     // Update is called once per frame
@@ -73,6 +75,20 @@ public class GameController : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void LoadLocalSettingsParams()
+    {
+        var json = Exports.ReceiveLocalSettingsParams();
+        var settingsParams = JsonUtility.FromJson<SettingsParams>(json);
+
+        GameController.cameraSpeed = settingsParams.cameraSpeed;
+        GameController.coinRotateSpeed = settingsParams.coinRotateSpeed;
+        Physics.gravity = new Vector3(settingsParams.gravityX, settingsParams.gravityY, settingsParams.gravityZ);
+        GameController.playerDownSpeed = settingsParams.playerDownSpeed;
+        GameController.playerJumpPower = settingsParams.playerJumpPower;
+        GameController.playerSpeed = settingsParams.playerSpeed;
+        GameController.playerSquattingScale = settingsParams.playerSquattingScale;
     }
 
     public GameObject NextPlane()
@@ -109,6 +125,37 @@ public class GameController : MonoBehaviour
     public static float ScreenTop()
     {
         return Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y;
+    }
+
+    public void SendSettingsParams()
+    {
+        var settingsParams = new SettingsParams();
+
+        settingsParams.cameraSpeed = GameController.cameraSpeed;
+        settingsParams.coinRotateSpeed = GameController.coinRotateSpeed;
+        settingsParams.gravityX = Physics.gravity.x;
+        settingsParams.gravityY = Physics.gravity.y;
+        settingsParams.gravityZ = Physics.gravity.z;
+        settingsParams.playerDownSpeed = GameController.playerDownSpeed;
+        settingsParams.playerJumpPower = GameController.playerJumpPower;
+        settingsParams.playerSpeed = GameController.playerSpeed;
+        settingsParams.playerSquattingScale = GameController.playerSquattingScale;
+
+        var json = JsonUtility.ToJson(settingsParams);
+        Exports.SendSettingsParams(json);
+    }
+
+    public class SettingsParams
+    {
+        public float cameraSpeed;
+        public float coinRotateSpeed;
+        public float gravityX;
+        public float gravityY;
+        public float gravityZ;
+        public float playerDownSpeed;
+        public float playerJumpPower;
+        public float playerSpeed;
+        public float playerSquattingScale;
     }
 
     public void Toggle()

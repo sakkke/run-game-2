@@ -8,6 +8,12 @@ public class Exports : MonoBehaviour
     [DllImport("__Internal")]
     public static extern void GameOver();
 
+    [DllImport("__Internal")]
+    public static extern string ReceiveLocalSettingsParams();
+
+    [DllImport("__Internal")]
+    public static extern void SendSettingsParams(string json);
+
     // Start is called before the first frame update
     void Start()
     {
