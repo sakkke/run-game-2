@@ -37,3 +37,6 @@ next-env.d.ts
 
 # unity
 public/unity-build
+
+# prisma
+/.env
