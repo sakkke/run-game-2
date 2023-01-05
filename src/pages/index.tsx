@@ -67,6 +67,8 @@ export default function Home() {
   const [playerSpeed, setPlayerSpeed] = useState(settingsParams.playerSpeed)
   const [playerSquattingScale, setPlayerSquattingScale] = useState(settingsParams.playerSquattingScale)
 
+  const [score, setScore] = useState(0)
+
   const handleGameOver = () => {
     setIsGameOver(true)
   }
@@ -236,6 +238,10 @@ export default function Home() {
           </div>
         </div>
       </> : scene === Scene.Game ? <>
+        <div className="bg-stone-900/75 fixed flex min-w-[200px] mr-4 mt-4 p-4 right-0 rounded top-0">
+          <div className={`${inter.className} font-bold text-stone-50`}>Score:</div>
+          <div className={`${inter.className} flex-grow text-right text-stone-50`}>{score}</div>
+        </div>
         <Modal
           isOpen={isGameOver}
           className="-translate-y-1/2 absolute bg-stone-900/75 grid h-fit left-8 p-8 place-items-center right-8 top-1/2"
