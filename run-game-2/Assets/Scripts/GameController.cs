@@ -77,6 +77,11 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public void LoadMultiplayer()
+    {
+        SceneManager.LoadScene("MultiplayerScene");
+    }
+
     public void LoadLocalSettingsParams()
     {
         var json = Exports.ReceiveLocalSettingsParams();

@@ -17,5 +17,8 @@ indent_style = tab
 [*.prisma]
 indent_size = 2
 
+[*.ts]
+indent_size = 2
+
 [*.tsx]
 indent_size = 2

@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import { Inter } from '@next/font/google'
 import { Unity, useUnityContext } from 'react-unity-webgl'
 import type { ChangeEvent } from 'react'
+import { io } from 'socket.io-client'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -146,6 +147,14 @@ export default function Home() {
     return () => void removeEventListener('SendSettingsParams', handleSettingsParams)
   }, [addEventListener, removeEventListener, handleSettingsParams])
 
+  useEffect(() => {
+    const socket = io('/', { path: '/api/socketio' })
+
+    socket.on('create client', () => {
+      sendMessage('Game Controller', 'CreateClient', socket.id)
+    })
+  }, [])
+
   const loadMainMenu = () => {
     sendMessage('Game Controller', 'LoadEmpty')
     setScene(Scene.MainMenu)
@@ -157,6 +166,7 @@ export default function Home() {
   }
 
   const loadMultiplayer = () => {
+    sendMessage('Game Controller', 'LoadMultiplayer')
     setScene(Scene.Multiplayer)
   }
 
