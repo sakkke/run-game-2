@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D _rigidbody2D;
     SpriteRenderer _spriteRenderer;
 
-
     // Start is called before the first frame update
     void Start()
     {
