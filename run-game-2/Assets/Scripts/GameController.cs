@@ -112,6 +112,13 @@ public class GameController : MonoBehaviour
         IsPaused = false;
     }
 
+    public static float ScreenCenter()
+    {
+        var left = GameController.ScreenLeft();
+        var right = GameController.ScreenRight();
+        return (right - left) / 2 + left;
+    }
+
     public static float ScreenLeft()
     {
         return Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x;

@@ -15,10 +15,7 @@ public class AutoPlane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var right = GameController.ScreenRight();
-        var left = GameController.ScreenLeft();
-
-        var center = (right - left) / 2 + left;
+        var center = GameController.ScreenCenter();
 
         if (_gameController.CurrentPlaneLeft < center)
         {
