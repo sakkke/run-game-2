@@ -69,6 +69,8 @@ export default function Home() {
 
   const [score, setScore] = useState(0)
 
+  const [clientIds, setClientIds] = useState<string[]>([])
+
   const handleGameOver = () => {
     setIsGameOver(true)
   }
@@ -153,7 +155,7 @@ export default function Home() {
     const socket = io('/', { path: '/api/socketio' })
 
     socket.on('create client', () => {
-      sendMessage('Game Controller', 'CreateClient', socket.id)
+      setClientIds([...clientIds, socket.id])
     })
   }, [])
 
@@ -167,8 +169,21 @@ export default function Home() {
     setScene(Scene.Game)
   }
 
+  const sleep = (sec: number) => new Promise(resolve => void setTimeout(resolve, sec))
+
   const loadMultiplayer = () => {
     sendMessage('Game Controller', 'LoadMultiplayer')
+
+    ; (async () => {
+      await sleep(1000)
+
+      for (const clientId of clientIds) {
+        sendMessage('Game Controller', 'CreateClient', clientId)
+      }
+
+      setClientIds([])
+    })()
+
     setScene(Scene.Multiplayer)
   }
 
