@@ -5,6 +5,7 @@ import { Inter } from '@next/font/google'
 import { Unity, useUnityContext } from 'react-unity-webgl'
 import type { ChangeEvent } from 'react'
 import { io } from 'socket.io-client'
+import { Client } from '@prisma/client'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -69,8 +70,6 @@ export default function Home() {
 
   const [score, setScore] = useState(0)
 
-  const [clientIds, setClientIds] = useState<string[]>([])
-
   const handleGameOver = () => {
     setIsGameOver(true)
   }
@@ -122,11 +121,23 @@ export default function Home() {
   }
 
   const handleCreateClient = () => {
-    for (const clientId of clientIds) {
-      sendMessage('Game Controller', 'CreateClient', clientId)
-    }
+    const socket = io('/', { path: '/api/socketio' })
 
-    setClientIds([])
+    socket.on('connect', () => {
+      (async () => {
+        const res = await fetch('/api/clients')
+        const clients: Client[] = await res.json()
+        const ids = clients.map(client => client.clientId)
+
+        for (const id of ids) {
+          sendMessage('Game Controller', 'CreateClient', id)
+        }
+      })()
+    })
+
+    socket.on('create client', clientId => {
+      sendMessage('Game Controller', 'CreateClient', clientId)
+    })
   }
 
   const handleSettingsParams = useCallback((json: string) => {
@@ -163,14 +174,6 @@ export default function Home() {
     addEventListener('InitializeMultiplayer', handleCreateClient)
     return () => void removeEventListener('InitializeMultiplayer', handleCreateClient)
   })
-
-  useEffect(() => {
-    const socket = io('/', { path: '/api/socketio' })
-
-    socket.on('create client', () => {
-      setClientIds([...clientIds, socket.id])
-    })
-  }, [])
 
   const loadMainMenu = () => {
     sendMessage('Game Controller', 'LoadEmpty')
