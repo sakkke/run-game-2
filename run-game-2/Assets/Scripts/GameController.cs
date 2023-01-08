@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     public AudioSource AudioSrc { get; set; }
     public bool IsGameOver { get; set; }
+    public bool IsMultiplayer { get; set; }
     public bool IsPaused { get; set; }
     public GameObject Plane;
 

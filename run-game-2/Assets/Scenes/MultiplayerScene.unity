@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 1778923018}
   - component: {fileID: 1778923020}
   - component: {fileID: 1778923021}
+  - component: {fileID: 1778923022}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: GameController
@@ -464,3 +465,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1778923022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778923015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161b3edb2b8ad42acb6157c99090bb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
