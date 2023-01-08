@@ -121,7 +121,7 @@ export default function Home() {
     localStorage.setItem('settingsParams', newJson)
   }
 
-  const handleInitializeMultiplayer = () => {
+  const handleCreateClient = () => {
     for (const clientId of clientIds) {
       sendMessage('Game Controller', 'CreateClient', clientId)
     }
@@ -160,8 +160,8 @@ export default function Home() {
   }, [addEventListener, removeEventListener, handleSettingsParams])
 
   useEffect(() => {
-    addEventListener('InitializeMultiplayer', handleInitializeMultiplayer)
-    return () => void removeEventListener('InitializeMultiplayer', handleInitializeMultiplayer)
+    addEventListener('InitializeMultiplayer', handleCreateClient)
+    return () => void removeEventListener('InitializeMultiplayer', handleCreateClient)
   })
 
   useEffect(() => {
