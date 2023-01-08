@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!_gameController.IsMultiplayer && Input.GetKeyDown(KeyCode.Escape))
         {
             _gameController.Toggle();
         }
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         var PlayerLeft = GameController.ScreenLeft() + halfWidth;
         var PlayerRight = GameController.ScreenRight() - halfWidth;
 
-        if (!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H)))
+        if (_gameController.IsMultiplayer || !(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H)))
         {
             transform.position += Vector3.right * Time.deltaTime * GameController.cameraSpeed;
         }
@@ -60,33 +60,33 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(PlayerRight, transform.position.y);
         }
 
-        if (!_jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0)))
+        if (!_gameController.IsMultiplayer && !_jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0)))
         {
             _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
             _audioSource.PlayOneShot(_jumpAudioClip);
             _jumping = true;
         }
 
-        if (_jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
+        if (!_gameController.IsMultiplayer && _jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
         {
             transform.position = new Vector2(transform.position.x, transform.position.y - GameController.playerDownSpeed);
         }
 
-        if (!_jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
+        if (!_gameController.IsMultiplayer && !_jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
         {
             transform.localScale = new Vector2(transform.localScale.x, GameController.playerSquattingScale);
         }
-        else if (!_jumping)
+        else if (!_gameController.IsMultiplayer && !_jumping)
         {
             transform.localScale = new Vector2(transform.localScale.x, 1);
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H))
+        if (!_gameController.IsMultiplayer && Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H))
         {
             transform.position = new Vector2(transform.position.x - GameController.playerSpeed, transform.position.y);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.L))
+        if (!_gameController.IsMultiplayer && Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.L))
         {
             transform.position = new Vector2(transform.position.x + GameController.playerSpeed, transform.position.y);
         }

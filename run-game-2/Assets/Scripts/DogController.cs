@@ -20,7 +20,7 @@ public class DogController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision2D)
     {
-        if (collision2D.gameObject.tag == "Player")
+        if (!_gameController.IsMultiplayer && collision2D.gameObject.tag == "Player")
         {
             _gameController.GameOver();
         }
