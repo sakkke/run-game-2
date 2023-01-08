@@ -2,6 +2,9 @@ var GameController = {
     GameOver: function() {
         dispatchReactUnityEvent('GameOver')
     },
+    InitializeMultiplayer: function() {
+        dispatchReactUnityEvent('InitializeMultiplayer')
+    },
     ReceiveLocalSettingsParams: function() {
         var json = localStorage.getItem('settingsParams')
         var bufferSize = lengthBytesUTF8(json) + 1

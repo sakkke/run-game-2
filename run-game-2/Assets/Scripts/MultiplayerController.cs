@@ -10,7 +10,7 @@ public class MultiplayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Exports.InitializeMultiplayer();
     }
 
     // Update is called once per frame

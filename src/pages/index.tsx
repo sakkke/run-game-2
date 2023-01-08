@@ -121,6 +121,14 @@ export default function Home() {
     localStorage.setItem('settingsParams', newJson)
   }
 
+  const handleInitializeMultiplayer = () => {
+    for (const clientId of clientIds) {
+      sendMessage('Game Controller', 'CreateClient', clientId)
+    }
+
+    setClientIds([])
+  }
+
   const handleSettingsParams = useCallback((json: string) => {
     const res: ISettingsParams = JSON.parse(json)
 
@@ -152,6 +160,11 @@ export default function Home() {
   }, [addEventListener, removeEventListener, handleSettingsParams])
 
   useEffect(() => {
+    addEventListener('InitializeMultiplayer', handleInitializeMultiplayer)
+    return () => void removeEventListener('InitializeMultiplayer', handleInitializeMultiplayer)
+  })
+
+  useEffect(() => {
     const socket = io('/', { path: '/api/socketio' })
 
     socket.on('create client', () => {
@@ -169,21 +182,8 @@ export default function Home() {
     setScene(Scene.Game)
   }
 
-  const sleep = (sec: number) => new Promise(resolve => void setTimeout(resolve, sec))
-
   const loadMultiplayer = () => {
     sendMessage('Game Controller', 'LoadMultiplayer')
-
-    ; (async () => {
-      await sleep(1000)
-
-      for (const clientId of clientIds) {
-        sendMessage('Game Controller', 'CreateClient', clientId)
-      }
-
-      setClientIds([])
-    })()
-
     setScene(Scene.Multiplayer)
   }
 

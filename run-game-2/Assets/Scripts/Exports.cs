@@ -9,6 +9,9 @@ public class Exports : MonoBehaviour
     public static extern void GameOver();
 
     [DllImport("__Internal")]
+    public static extern void InitializeMultiplayer();
+
+    [DllImport("__Internal")]
     public static extern string ReceiveLocalSettingsParams();
 
     [DllImport("__Internal")]
