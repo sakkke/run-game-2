@@ -9,6 +9,25 @@ import { Client } from '@prisma/client'
 
 const inter = Inter({ subsets: ['latin'] })
 
+enum GameEventType {
+  Jump,
+}
+
+interface IGameEvent {
+  type: GameEventType
+  clientId: string
+}
+
+const GameEvent = class implements IGameEvent {
+  type: GameEventType
+  clientId: string
+
+  constructor (type: GameEventType, clientId: string) {
+    this.type = type
+    this.clientId = clientId
+  }
+}
+
 enum Scene {
   MainMenu,
   Game,
@@ -139,9 +158,26 @@ export default function Home() {
       sendMessage('Game Controller', 'CreateClient', clientId)
     })
 
+    socket.on('game event', (gameEventJson: string) => {
+      sendMessage('Game Controller', 'ParseEvent', gameEventJson)
+    })
+
     socket.on('remove client', (clientId: string) => {
       sendMessage('Game Controller', 'RemoveClient', clientId)
     })
+
+    const type = 'keydown'
+
+    const keydownListener = (ev: KeyboardEvent) => {
+      if (ev.key === 'ArrowUp') {
+        const gameEvent = new GameEvent(GameEventType.Jump, socket.id)
+        const json = JSON.stringify(gameEvent)
+        socket.emit('game event', json)
+      }
+    }
+
+    document.addEventListener(type, keydownListener)
+    return () => void document.removeEventListener(type, keydownListener)
   }
 
   const handleSettingsParams = useCallback((json: string) => {

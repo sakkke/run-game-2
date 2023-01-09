@@ -48,6 +48,10 @@ export default function handler(
 
         io.emit('remove client', clientId)
       })
+
+      socket.on('game event', gameEventJson => {
+        io.emit('game event', gameEventJson)
+      })
     })
   }
 
