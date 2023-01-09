@@ -11,9 +11,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AudioClip _jumpAudioClip;
 
-    bool _jumping;
     Rigidbody2D _rigidbody2D;
     SpriteRenderer _spriteRenderer;
+    public bool Jumping;
 
     // Start is called before the first frame update
     void Start()
@@ -60,21 +60,21 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(PlayerRight, transform.position.y);
         }
 
-        if (!_gameController.IsMultiplayer && !_jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0)))
+        if (!_gameController.IsMultiplayer && !Jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0)))
         {
             Jump();
         }
 
-        if (!_gameController.IsMultiplayer && _jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
+        if (!_gameController.IsMultiplayer && Jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
         {
             Dive();
         }
 
-        if (!_gameController.IsMultiplayer && !_jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
+        if (!_gameController.IsMultiplayer && !Jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
         {
             Squat();
         }
-        else if (!_gameController.IsMultiplayer && !_jumping)
+        else if (!_gameController.IsMultiplayer && !Jumping)
         {
             StandUp();
         }
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
             MoveRight();
         }
 
-        if (_jumping)
+        if (Jumping)
         {
             _animator.SetBool("Jump", true);
         }
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
         _audioSource.PlayOneShot(_jumpAudioClip);
-        _jumping = true;
+        Jumping = true;
     }
 
     public void MoveLeft()
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision2D.gameObject.tag == "Plane")
         {
-            _jumping = false;
+            Jumping = false;
         }
     }
 
