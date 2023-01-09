@@ -138,6 +138,10 @@ export default function Home() {
     socket.on('create client', (clientId: string) => {
       sendMessage('Game Controller', 'CreateClient', clientId)
     })
+
+    socket.on('remove client', (clientId: string) => {
+      sendMessage('Game Controller', 'RemoveClient', clientId)
+    })
   }
 
   const handleSettingsParams = useCallback((json: string) => {

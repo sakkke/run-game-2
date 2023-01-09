@@ -28,4 +28,10 @@ public class MultiplayerController : MonoBehaviour
         var client = Instantiate(_player, vec, Quaternion.identity);
         Clients[clientId] = client;
     }
+
+    public void RemoveClient(string clientId)
+    {
+        Destroy(Clients[clientId]);
+        Clients.Remove(clientId);
+    }
 }
