@@ -20,12 +20,14 @@ export default function handler(
     // @ts-ignore
     res.socket.server.io = io
 
+    client(async prisma => {
+      await prisma.client.deleteMany({})
+    })
+
     io.on('connection', socket => {
       const clientId = socket.id
 
       client(async prisma => {
-        await prisma.client.deleteMany({})
-
         await prisma.client.create({
           data: {
             clientId,
