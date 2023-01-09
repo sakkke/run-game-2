@@ -202,6 +202,10 @@ export default function Home() {
     }
 
     const keypressListener = (ev: KeyboardEvent) => {
+      if (ev.repeat) {
+        return
+      }
+
       if (ev.key === 'ArrowUp') {
         const gameEvent = new GameEvent(GameEventType.Jump, socket.id)
         const json = JSON.stringify(gameEvent)
@@ -210,11 +214,11 @@ export default function Home() {
     }
 
     document.addEventListener('keydown', keydownListener)
-    document.addEventListener('keypress', keypressListener)
+    document.addEventListener('keydown', keypressListener)
 
     return () => {
       document.removeEventListener('keydown', keydownListener)
-      document.removeEventListener('keypress', keypressListener)
+      document.removeEventListener('keydown', keypressListener)
     }
   }
 
