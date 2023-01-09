@@ -106,7 +106,8 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
+        var vec = Vector2.up * GameController.playerJumpPower;
+        _rigidbody2D.AddForce(vec, ForceMode2D.Impulse);
         _audioSource.PlayOneShot(_jumpAudioClip);
         Jumping = true;
     }
