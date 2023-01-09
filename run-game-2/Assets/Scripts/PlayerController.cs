@@ -62,33 +62,31 @@ public class PlayerController : MonoBehaviour
 
         if (!_gameController.IsMultiplayer && !_jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0)))
         {
-            _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
-            _audioSource.PlayOneShot(_jumpAudioClip);
-            _jumping = true;
+            Jump();
         }
 
         if (!_gameController.IsMultiplayer && _jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - GameController.playerDownSpeed);
+            Dive();
         }
 
         if (!_gameController.IsMultiplayer && !_jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
         {
-            transform.localScale = new Vector2(transform.localScale.x, GameController.playerSquattingScale);
+            Squat();
         }
         else if (!_gameController.IsMultiplayer && !_jumping)
         {
-            transform.localScale = new Vector2(transform.localScale.x, 1);
+            StandUp();
         }
 
         if (!_gameController.IsMultiplayer && Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H))
         {
-            transform.position = new Vector2(transform.position.x - GameController.playerSpeed, transform.position.y);
+            MoveLeft();
         }
 
         if (!_gameController.IsMultiplayer && Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.L))
         {
-            transform.position = new Vector2(transform.position.x + GameController.playerSpeed, transform.position.y);
+            MoveRight();
         }
 
         if (_jumping)
@@ -101,11 +99,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Dive()
+    {
+        transform.position = new Vector2(transform.position.x, transform.position.y - GameController.playerDownSpeed);
+    }
+
+    public void Jump()
+    {
+        _rigidbody2D.AddForce(Vector2.up * GameController.playerJumpPower, ForceMode2D.Impulse);
+        _audioSource.PlayOneShot(_jumpAudioClip);
+        _jumping = true;
+    }
+
+    public void MoveLeft()
+    {
+        transform.position = new Vector2(transform.position.x - GameController.playerSpeed, transform.position.y);
+    }
+
+    public void MoveRight()
+    {
+        transform.position = new Vector2(transform.position.x + GameController.playerSpeed, transform.position.y);
+    }
+
     void OnCollisionEnter2D(Collision2D collision2D)
     {
         if (collision2D.gameObject.tag == "Plane")
         {
             _jumping = false;
         }
+    }
+
+    public void Squat()
+    {
+        transform.localScale = new Vector2(transform.localScale.x, GameController.playerSquattingScale);
+    }
+
+    public void StandUp()
+    {
+        transform.localScale = new Vector2(transform.localScale.x, 1);
     }
 }
