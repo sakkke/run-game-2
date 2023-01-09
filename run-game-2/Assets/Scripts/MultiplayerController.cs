@@ -5,7 +5,12 @@ using UnityEngine;
 public class MultiplayerController : MonoBehaviour
 {
     enum GameEventType {
+        Dive,
         Jump,
+        MoveLeft,
+        MoveRight,
+        Squat,
+        StandUp,
     }
 
     [SerializeField]
@@ -45,9 +50,40 @@ public class MultiplayerController : MonoBehaviour
 
         switch (ev.type)
         {
+            case GameEventType.Dive:
+                PlayerDive(ev.clientId);
+                break;
+
             case GameEventType.Jump:
                 PlayerJump(ev.clientId);
                 break;
+
+            case GameEventType.MoveLeft:
+                PlayerMoveLeft(ev.clientId);
+                break;
+
+            case GameEventType.MoveRight:
+                PlayerMoveRight(ev.clientId);
+                break;
+
+            case GameEventType.Squat:
+                PlayerSquat(ev.clientId);
+                break;
+
+            case GameEventType.StandUp:
+                PlayerStandUp(ev.clientId);
+                break;
+        }
+    }
+
+    public void PlayerDive(string clientId)
+    {
+        var client = Clients[clientId];
+        var controller = client.GetComponent<PlayerController>();
+
+        if (controller.Jumping)
+        {
+            controller.Dive();
         }
     }
 
@@ -59,6 +95,44 @@ public class MultiplayerController : MonoBehaviour
         if (!controller.Jumping)
         {
             controller.Jump();
+        }
+    }
+
+    public void PlayerMoveLeft(string clientId)
+    {
+        var client = Clients[clientId];
+        var controller = client.GetComponent<PlayerController>();
+
+        controller.MoveLeft();
+    }
+
+    public void PlayerMoveRight(string clientId)
+    {
+        var client = Clients[clientId];
+        var controller = client.GetComponent<PlayerController>();
+
+        controller.MoveRight();
+    }
+
+    public void PlayerSquat(string clientId)
+    {
+        var client = Clients[clientId];
+        var controller = client.GetComponent<PlayerController>();
+
+        if (!controller.Jumping)
+        {
+            controller.Squat();
+        }
+    }
+
+    public void PlayerStandUp(string clientId)
+    {
+        var client = Clients[clientId];
+        var controller = client.GetComponent<PlayerController>();
+
+        if (!controller.Jumping)
+        {
+            controller.StandUp();
         }
     }
 

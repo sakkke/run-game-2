@@ -10,7 +10,12 @@ import { Client } from '@prisma/client'
 const inter = Inter({ subsets: ['latin'] })
 
 enum GameEventType {
+  Dive,
   Jump,
+  MoveLeft,
+  MoveRight,
+  Squat,
+  StandUp,
 }
 
 interface IGameEvent {
@@ -166,8 +171,6 @@ export default function Home() {
       sendMessage('Game Controller', 'RemoveClient', clientId)
     })
 
-    const type = 'keydown'
-
     const keydownListener = (ev: KeyboardEvent) => {
       if (ev.key === 'ArrowUp') {
         const gameEvent = new GameEvent(GameEventType.Jump, socket.id)
@@ -176,8 +179,43 @@ export default function Home() {
       }
     }
 
-    document.addEventListener(type, keydownListener)
-    return () => void document.removeEventListener(type, keydownListener)
+    const keypressListener = (ev: KeyboardEvent) => {
+      if (ev.key === 'ArrowDown') {
+        const gameEvent = new GameEvent(GameEventType.Dive, socket.id)
+        const json = JSON.stringify(gameEvent)
+        socket.emit('game event', json)
+      }
+
+      if (ev.key === 'ArrowDown') {
+        const gameEvent = new GameEvent(GameEventType.Squat, socket.id)
+        const json = JSON.stringify(gameEvent)
+        socket.emit('game event', json)
+      } else {
+        const gameEvent = new GameEvent(GameEventType.StandUp, socket.id)
+        const json = JSON.stringify(gameEvent)
+        socket.emit('game event', json)
+      }
+
+      if (ev.key === 'ArrowLeft') {
+        const gameEvent = new GameEvent(GameEventType.MoveLeft, socket.id)
+        const json = JSON.stringify(gameEvent)
+        socket.emit('game event', json)
+      }
+
+      if (ev.key === 'ArrowRight') {
+        const gameEvent = new GameEvent(GameEventType.MoveRight, socket.id)
+        const json = JSON.stringify(gameEvent)
+        socket.emit('game event', json)
+      }
+    }
+
+    document.addEventListener('keydown', keydownListener)
+    document.addEventListener('keypress', keypressListener)
+
+    return () => {
+      document.removeEventListener('keydown', keydownListener)
+      document.removeEventListener('keypress', keypressListener)
+    }
   }
 
   const handleSettingsParams = useCallback((json: string) => {
