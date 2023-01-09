@@ -1,0 +1,21 @@
+{
+    "Camera Speed": "カメラの速度",
+    "Coin Rotate Speed": "コインの回転速度",
+    "Game Over!": "ゲームオーバー！",
+    "Gravity X-axis": "X軸の重力",
+    "Gravity Y-axis": "Y軸の重力",
+    "Gravity Z-axis": "Z軸の重力",
+    "Main Menu": "メインメニュー",
+    "Multiplayer": "マルチプレイヤー",
+    "Play": "プレイ",
+    "Player Down Speed": "プレイヤーの落下速度",
+    "Player Jump Power": "プレイヤーのジャンプ力",
+    "Player Speed": "プレイヤーの速度",
+    "Player Squatting Scale": "プレイヤーがしゃがんだ時のスケール",
+    "Reset to default": "設定をデフォルトに戻す",
+    "Restart": "リスタート",
+    "Run Game": "ランゲーム",
+    "Save & Apply": "保存＆適用",
+    "Score": "スコア",
+    "Settings": "設定"
+}

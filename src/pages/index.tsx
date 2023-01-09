@@ -338,24 +338,24 @@ export default function Home() {
       {scene === Scene.MainMenu ? <>
         <div className="bg-stone-900 fixed grid h-screen place-items-center top-0 w-screen">
           <div className="flex flex-col gap-8 items-center">
-            <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>Run Game</h1>
+            <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('Run Game')}</h1>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadGame}
-            >Play</button>
+            >{t('Play')}</button>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadMultiplayer}
-            >Multiplayer</button>
+            >{t('Multiplayer')}</button>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadSettings}
-            >Settings</button>
+            >{t('Settings')}</button>
           </div>
         </div>
       </> : scene === Scene.Game ? <>
         <div className="bg-stone-900/75 fixed flex min-w-[200px] mr-4 mt-4 p-4 right-0 rounded top-0">
-          <div className={`${inter.className} font-bold text-stone-50`}>Score:</div>
+          <div className={`${inter.className} font-bold text-stone-50`}>{t('Score')}:</div>
           <div className={`${inter.className} flex-grow text-right text-stone-50`}>{score}</div>
         </div>
         <Modal
@@ -363,25 +363,25 @@ export default function Home() {
           className="-translate-y-1/2 absolute bg-stone-900/75 grid h-fit left-8 p-8 place-items-center right-8 top-1/2"
         >
           <div className="flex flex-col gap-8 items-center">
-            <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>Game Over!</h2>
+            <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('Game Over!')}</h2>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={restartGame}
-            >Restart</button>
+            >{t('Restart')}</button>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={exitGame}
-            >Main Menu</button>
+            >{t('Main Menu')}</button>
           </div>
         </Modal>
       </> : scene === Scene.Multiplayer ? <>
-        <h2>Multiplayer</h2>
+        <h2>{t('Multiplayer')}</h2>
       </> : scene === Scene.Settings && <>
         <div className="bg-stone-900 fixed grid h-screen overflow-y-scroll p-8 place-items-center top-0 w-screen">
           <div className="flex flex-col gap-8 items-center">
-            <h2 className={`${inter.className} font-black text-2xl text-stone-50`}>Settings</h2>
+            <h2 className={`${inter.className} font-black text-2xl text-stone-50`}>{t('Settings')}</h2>
             <label className={`${inter.className} text-stone-50`}>
-              Gravity X-axis: <input
+              {t('Gravity X-axis')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setGravityX(+e.target.value)}
                 type="text"
@@ -389,7 +389,7 @@ export default function Home() {
               />
             </label>
             <label className={`${inter.className} text-stone-50`}>
-              Gravity Y-axis: <input
+              {t('Gravity Y-axis')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setGravityY(+e.target.value)}
                 type="text"
@@ -397,7 +397,7 @@ export default function Home() {
               />
             </label>
             <label className={`${inter.className} text-stone-50`}>
-              Gravity Z-axis: <input
+              {t('Gravity Z-axis')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setGravityZ(+e.target.value)}
                 type="text"
@@ -405,7 +405,7 @@ export default function Home() {
               />
             </label>
             <label className={`${inter.className} text-stone-50`}>
-              Camera Speed: <input
+              {t('Camera Speed')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setCameraSpeed(+e.target.value)}
                 type="text"
@@ -413,7 +413,7 @@ export default function Home() {
               />
             </label>
             <label className={`${inter.className} text-stone-50`}>
-              Coin Rotate Speed: <input
+              {t('Coin Rotate Speed')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setCoinRotateSpeed(+e.target.value)}
                 type="text"
@@ -421,7 +421,7 @@ export default function Home() {
               />
             </label>
             <label className={`${inter.className} text-stone-50`}>
-              Player Down Speed: <input
+              {t('Player Down Speed')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setPlayerDownSpeed(+e.target.value)}
                 type="text"
@@ -429,7 +429,7 @@ export default function Home() {
               />
             </label>
             <label className={`${inter.className} text-stone-50`}>
-              Player Jump Power: <input
+              {t('Player Jump Power')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setPlayerJumpPower(+e.target.value)}
                 type="text"
@@ -437,7 +437,7 @@ export default function Home() {
               />
             </label>
             <label className={`${inter.className} text-stone-50`}>
-              Player Speed: <input
+              {t('Player Speed')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setPlayerSpeed(+e.target.value)}
                 type="text"
@@ -445,7 +445,7 @@ export default function Home() {
               />
             </label>
             <label className={`${inter.className} text-stone-50`}>
-              Player Squatting Scale: <input
+              {t('Player Squatting Scale')}: <input
                 className="bg-transparent border-b border-b-blue-500 text-right"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => void setPlayerSquattingScale(+e.target.value)}
                 type="text"
@@ -456,16 +456,16 @@ export default function Home() {
               <button
                 className={`${inter.className} bg-green-500 font-bold min-h-12 p-4 rounded-full text-green-50 w-full`}
                 onClick={applySettings}
-              >Save & Apply</button>
+              >{t('Save & Apply')}</button>
               <button
                 className={`${inter.className} bg-red-500 font-bold min-h-12 p-4 rounded-full text-red-50 w-full`}
                 onClick={applyDefaultSettingsParams}
-              >Reset to default</button>
+              >{t('Reset to default')}</button>
             </div>
             <button
               className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-full`}
               onClick={loadMainMenu}
-            >Main Menu</button>
+            >{t('Main Menu')}</button>
           </div>
         </div>
       </>}
