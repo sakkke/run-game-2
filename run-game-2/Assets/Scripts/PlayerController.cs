@@ -83,10 +83,18 @@ public class PlayerController : MonoBehaviour
         {
             MoveLeft();
         }
+        else
+        {
+            MoveBreak();
+        }
 
         if (!_gameController.IsMultiplayer && Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.L))
         {
             MoveRight();
+        }
+        else
+        {
+            MoveBreak();
         }
 
         if (Jumping)
@@ -101,7 +109,8 @@ public class PlayerController : MonoBehaviour
 
     public void Dive()
     {
-        transform.position = new Vector2(transform.position.x, transform.position.y - GameController.playerDownSpeed);
+        var vec = Vector2.down * GameController.playerDownSpeed;
+        _rigidbody2D.AddForce(vec);
     }
 
     public void Jump()
@@ -112,14 +121,22 @@ public class PlayerController : MonoBehaviour
         Jumping = true;
     }
 
+    public void MoveBreak()
+    {
+        var vec = new Vector2(0, _rigidbody2D.velocity.y);
+        _rigidbody2D.velocity = vec;
+    }
+
     public void MoveLeft()
     {
-        transform.position = new Vector2(transform.position.x - GameController.playerSpeed, transform.position.y);
+        var vec = Vector2.left * (GameController.playerSpeed - _rigidbody2D.velocity.x) * GameController.playerSpeed;
+        _rigidbody2D.AddForce(vec);
     }
 
     public void MoveRight()
     {
-        transform.position = new Vector2(transform.position.x + GameController.playerSpeed, transform.position.y);
+        var vec = Vector2.right * (GameController.playerSpeed - _rigidbody2D.velocity.x) * GameController.playerSpeed;
+        _rigidbody2D.AddForce(vec);
     }
 
     void OnCollisionEnter2D(Collision2D collision2D)
