@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
 enum GameEventType {
   Dive,
   Jump,
+  MoveBreak,
   MoveLeft,
   MoveRight,
   Squat,

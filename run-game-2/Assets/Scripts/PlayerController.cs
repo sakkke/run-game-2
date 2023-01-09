@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             MoveLeft();
         }
-        else
+        else if (!_gameController.IsMultiplayer)
         {
             MoveBreak();
         }
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         {
             MoveRight();
         }
-        else
+        else if (!_gameController.IsMultiplayer)
         {
             MoveBreak();
         }

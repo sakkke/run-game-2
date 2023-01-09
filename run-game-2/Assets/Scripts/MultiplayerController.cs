@@ -7,6 +7,7 @@ public class MultiplayerController : MonoBehaviour
     enum GameEventType {
         Dive,
         Jump,
+        MoveBreak,
         MoveLeft,
         MoveRight,
         Squat,
@@ -58,6 +59,10 @@ public class MultiplayerController : MonoBehaviour
                 PlayerJump(ev.clientId);
                 break;
 
+            case GameEventType.MoveBreak:
+                PlayerMoveBreak(ev.clientId);
+                break;
+
             case GameEventType.MoveLeft:
                 PlayerMoveLeft(ev.clientId);
                 break;
@@ -96,6 +101,14 @@ public class MultiplayerController : MonoBehaviour
         {
             controller.Jump();
         }
+    }
+
+    public void PlayerMoveBreak(string clientId)
+    {
+        var client = Clients[clientId];
+        var controller = client.GetComponent<PlayerController>();
+
+        controller.MoveBreak();
     }
 
     public void PlayerMoveLeft(string clientId)
