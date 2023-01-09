@@ -6,6 +6,19 @@ import { Unity, useUnityContext } from 'react-unity-webgl'
 import type { ChangeEvent } from 'react'
 import { io } from 'socket.io-client'
 import { Client } from '@prisma/client'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [
+        'common',
+      ])),
+      // Will be passed to the page component as props
+    },
+  }
+}
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -94,6 +107,8 @@ export default function Home() {
   const [playerSquattingScale, setPlayerSquattingScale] = useState(settingsParams.playerSquattingScale)
 
   const [score, setScore] = useState(0)
+
+  const { t } = useTranslation('common')
 
   const handleGameOver = () => {
     setIsGameOver(true)
