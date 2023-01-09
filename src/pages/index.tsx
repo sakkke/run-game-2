@@ -135,7 +135,7 @@ export default function Home() {
       })()
     })
 
-    socket.on('create client', clientId => {
+    socket.on('create client', (clientId: string) => {
       sendMessage('Game Controller', 'CreateClient', clientId)
     })
   }
