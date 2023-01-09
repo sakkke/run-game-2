@@ -172,14 +172,6 @@ export default function Home() {
     })
 
     const keydownListener = (ev: KeyboardEvent) => {
-      if (ev.key === 'ArrowUp') {
-        const gameEvent = new GameEvent(GameEventType.Jump, socket.id)
-        const json = JSON.stringify(gameEvent)
-        socket.emit('game event', json)
-      }
-    }
-
-    const keypressListener = (ev: KeyboardEvent) => {
       if (ev.key === 'ArrowDown') {
         const gameEvent = new GameEvent(GameEventType.Dive, socket.id)
         const json = JSON.stringify(gameEvent)
@@ -204,6 +196,14 @@ export default function Home() {
 
       if (ev.key === 'ArrowRight') {
         const gameEvent = new GameEvent(GameEventType.MoveRight, socket.id)
+        const json = JSON.stringify(gameEvent)
+        socket.emit('game event', json)
+      }
+    }
+
+    const keypressListener = (ev: KeyboardEvent) => {
+      if (ev.key === 'ArrowUp') {
+        const gameEvent = new GameEvent(GameEventType.Jump, socket.id)
         const json = JSON.stringify(gameEvent)
         socket.emit('game event', json)
       }
