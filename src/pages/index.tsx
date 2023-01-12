@@ -278,14 +278,16 @@ export default function Home() {
   })
 
   useEffect(() => {
-    setInterval(() => {
-      if (scene !== Scene.Game) {
-        return
-      }
+    if (scene !== Scene.Game || isGameOver) {
+      return
+    }
 
+    const id = setInterval(() => {
       setScore(s => s + 1)
     }, 10)
-  }, [scene])
+
+    return () => void clearInterval(id)
+  }, [isGameOver, scene])
 
   const loadMainMenu = () => {
     sendMessage('Game Controller', 'LoadEmpty')
