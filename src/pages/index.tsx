@@ -273,12 +273,23 @@ export default function Home() {
     return () => void removeEventListener('InitializeMultiplayer', handleCreateClient)
   })
 
+  useEffect(() => {
+    setInterval(() => {
+      if (scene !== Scene.Game) {
+        return
+      }
+
+      setScore(s => s + 1)
+    }, 10)
+  }, [scene])
+
   const loadMainMenu = () => {
     sendMessage('Game Controller', 'LoadEmpty')
     setScene(Scene.MainMenu)
   }
 
   const loadGame = () => {
+    setScore(s => 0)
     sendMessage('Game Controller', 'LoadGame')
     setScene(Scene.Game)
   }
