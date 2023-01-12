@@ -31,7 +31,7 @@ public class CoinController : MonoBehaviour
         if (collider2D.gameObject.tag == "Player")
         {
             Destroy(gameObject);
-            _gameController.IncreaseScore(0);
+            _gameController.IncreaseScore(1000);
             _gameController.AudioSrc.PlayOneShot(_triggerAudioClip);
         }
     }
