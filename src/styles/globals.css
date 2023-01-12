@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --bg: #1c1917;
+}
+
+@keyframes enter {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+body {
+  animation: enter .2s;
+  background-color: var(--bg);
+}
