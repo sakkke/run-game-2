@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Run Game",
+  "short_name": "Run Game",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1c1917",
+  "description": "Run Game",
+  "icons": [{
+    "src": "icon.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

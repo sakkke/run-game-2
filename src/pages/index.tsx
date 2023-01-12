@@ -331,6 +331,14 @@ export default function Home() {
         <meta name="description" content="Run Game" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="manifest" href="manifest.json" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('/sw.js')
+            }`
+          }}
+        />
       </Head>
       <main
         className="bg-cover flex flex-col h-screen"
