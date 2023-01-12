@@ -106,12 +106,18 @@ export default function Home() {
   const [playerSpeed, setPlayerSpeed] = useState(settingsParams.playerSpeed)
   const [playerSquattingScale, setPlayerSquattingScale] = useState(settingsParams.playerSquattingScale)
 
+  const [highScore, setHighScore] = useState(0)
   const [score, setScore] = useState(0)
 
   const { t } = useTranslation('common')
 
   const handleGameOver = () => {
     setIsGameOver(true)
+
+    if (score > highScore) {
+      setHighScore(h => score)
+      localStorage.setItem('highScore', `${score}`)
+    }
   }
 
   const updateSettingsParams = (s: ISettingsParams) => {
@@ -255,6 +261,10 @@ export default function Home() {
     applyLocalSettingsParams()
   }, [])
 
+  const resetHighScore = () => {
+    setHighScore(h => 0)
+  }
+
   const { unityProvider, loadingProgression, isLoaded, sendMessage, addEventListener, removeEventListener } = useUnityContext({
     loaderUrl: 'unity-build/Build.loader.js',
     dataUrl: 'unity-build/Build.data',
@@ -276,6 +286,10 @@ export default function Home() {
     addEventListener('InitializeMultiplayer', handleCreateClient)
     return () => void removeEventListener('InitializeMultiplayer', handleCreateClient)
   })
+
+  useEffect(() => {
+    setHighScore(h => +(localStorage.getItem('highScore') || h))
+  }, [])
 
   useEffect(() => {
     if (scene !== Scene.Game || isGameOver) {
@@ -389,6 +403,12 @@ export default function Home() {
         >
           <div className="flex flex-col gap-8 items-center">
             <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('Game Over!')}</h2>
+            <p className={`${inter.className} font-bold text-stone-50`}>
+              {t('Current Score')}: {score}
+            </p>
+            <p className={`${inter.className} ${score > highScore ? 'font-bold text-green-500' : 'text-stone-50'}`}>
+              {score > highScore ? t('New High Score') : t('High Score')}: {highScore}
+            </p>
             <button
               className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={restartGame}
@@ -487,6 +507,13 @@ export default function Home() {
                 onClick={applyDefaultSettingsParams}
               >{t('Reset to default')}</button>
             </div>
+            <button
+              className={`${inter.className} bg-red-500 duration-75 font-bold h-12 hover:bg-red-600 p-4 rounded-full text-red-50 w-full`}
+              onClick={resetHighScore}
+            >{t('Reset high score')}</button>
+            <p className={`${inter.className} text-stone-50`}>
+              {t('Current high score')}: {highScore}
+            </p>
             <button
               className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-full`}
               onClick={loadMainMenu}
