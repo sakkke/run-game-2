@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
 
     public void IncreaseScore(int score)
     {
-        Debug.Log(score);
+        Exports.IncreaseScore(score);
     }
 
     public void GameOver()

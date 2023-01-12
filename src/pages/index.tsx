@@ -248,6 +248,10 @@ export default function Home() {
     }
   }
 
+  const handleIncreaseScore = useCallback((score: number) => {
+    setScore(s => s + score)
+  }, [score])
+
   const handleSettingsParams = useCallback((json: string) => {
     const res: ISettingsParams = JSON.parse(json)
 
@@ -285,6 +289,11 @@ export default function Home() {
   useEffect(() => {
     addEventListener('InitializeMultiplayer', handleCreateClient)
     return () => void removeEventListener('InitializeMultiplayer', handleCreateClient)
+  })
+
+  useEffect(() => {
+    addEventListener('IncreaseScore', handleIncreaseScore)
+    return () => void removeEventListener('IncreaseScore', handleIncreaseScore)
   })
 
   useEffect(() => {
