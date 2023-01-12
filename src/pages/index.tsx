@@ -363,15 +363,15 @@ export default function Home() {
           <div className="flex flex-col gap-8 items-center">
             <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('Run Game')}</h1>
             <button
-              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadGame}
             >{t('Play')}</button>
             <button
-              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadMultiplayer}
             >{t('Multiplayer')}</button>
             <button
-              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadSettings}
             >{t('Settings')}</button>
           </div>
@@ -388,11 +388,11 @@ export default function Home() {
           <div className="flex flex-col gap-8 items-center">
             <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('Game Over!')}</h2>
             <button
-              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={restartGame}
             >{t('Restart')}</button>
             <button
-              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={exitGame}
             >{t('Main Menu')}</button>
           </div>
@@ -477,16 +477,16 @@ export default function Home() {
             </label>
             <div className="flex gap-8 w-full">
               <button
-                className={`${inter.className} bg-green-500 font-bold min-h-12 p-4 rounded-full text-green-50 w-full`}
+                className={`${inter.className} bg-green-500 duration-75 font-bold hover:bg-green-600 min-h-12 p-4 rounded-full text-green-50 w-full`}
                 onClick={applySettings}
               >{t('Save & Apply')}</button>
               <button
-                className={`${inter.className} bg-red-500 font-bold min-h-12 p-4 rounded-full text-red-50 w-full`}
+                className={`${inter.className} bg-red-500 duration-75 font-bold hover:bg-red-600 min-h-12 p-4 rounded-full text-red-50 w-full`}
                 onClick={applyDefaultSettingsParams}
               >{t('Reset to default')}</button>
             </div>
             <button
-              className={`${inter.className} bg-stone-500 font-bold h-12 p-4 rounded-full text-stone-50 w-full`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-full`}
               onClick={loadMainMenu}
             >{t('Main Menu')}</button>
           </div>
