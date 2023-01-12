@@ -176,6 +176,10 @@ export default function Home() {
     })
 
     socket.on('create client', (clientId: string) => {
+      if (clientId === socket.id) {
+        return
+      }
+
       sendMessage('Game Controller', 'CreateClient', clientId)
     })
 
