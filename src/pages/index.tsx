@@ -348,7 +348,7 @@ export default function Home() {
         }`}
       </style>
       <Head>
-        <title>{t('Run Game')}</title>
+        <title>{t('ジャガイモラン')}</title>
         <meta name="description" content="Run Game" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -382,7 +382,7 @@ export default function Home() {
       {scene === Scene.MainMenu ? <>
         <div className="bg-stone-900 fixed grid h-screen place-items-center top-0 w-screen">
           <div className="flex flex-col gap-8 items-center">
-            <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('Run Game')}</h1>
+            <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('ジャガイモラン')}</h1>
             <button
               className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadGame}
