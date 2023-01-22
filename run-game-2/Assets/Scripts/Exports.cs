@@ -12,6 +12,10 @@ public class Exports : MonoBehaviour
     public static extern void IncreaseScore(int score);
 
     [DllImport("__Internal")]
+    public static extern void InitializeGame();
+
+
+    [DllImport("__Internal")]
     public static extern void InitializeMultiplayer();
 
     [DllImport("__Internal")]

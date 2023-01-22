@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
         SendSettingsParams();
         LoadLocalSettingsParams();
+        Exports.InitializeGame();
     }
 
     // Update is called once per frame

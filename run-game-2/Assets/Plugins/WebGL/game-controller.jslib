@@ -5,6 +5,9 @@ var GameController = {
     IncreaseScore: function(score) {
         dispatchReactUnityEvent('IncreaseScore', score)
     },
+    InitializeGame: function() {
+        dispatchReactUnityEvent('InitializeGame')
+    },
     InitializeMultiplayer: function() {
         dispatchReactUnityEvent('InitializeMultiplayer')
     },

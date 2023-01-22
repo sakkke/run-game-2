@@ -110,6 +110,7 @@ export default function Home() {
   const [score, setScore] = useState(0)
   const [isEnabledBackgroundAnimation, setIsEnabledBackgroundAnimation] = useState(true)
   const [isEnabledScoreIncrement, setIsEnabledScoreIncrement] = useState(true)
+  const [isInitializedGame, setIsInitializedGame] = useState(false)
 
   const { t } = useTranslation('common')
 
@@ -279,6 +280,10 @@ export default function Home() {
     setIsEnabledScoreIncrement(false)
   }
 
+  const handleInitializeGame = () => {
+    setIsInitializedGame(true)
+  }
+
   const resetHighScore = () => {
     setHighScore(h => 0)
   }
@@ -344,6 +349,11 @@ export default function Home() {
   useEffect(() => {
     addEventListener('StopScoreIncrement', handleStopScoreIncrement)
     return () => void removeEventListener('StopScoreIncrement', handleStopScoreIncrement)
+  })
+
+  useEffect(() => {
+    addEventListener('InitializeGame', handleInitializeGame)
+    return () => void removeEventListener('InitializeGame', handleInitializeGame)
   })
 
   const loadMainMenu = () => {
@@ -415,10 +425,10 @@ export default function Home() {
         <Unity
           unityProvider={unityProvider}
           style={{ visibility: isLoaded ? 'visible' : 'hidden' }}
-          className="max-h-screen mt-auto"
+          className={`${!isInitializedGame ? 'my-auto z-10' : 'mt-auto'} max-h-screen`}
         />
       </main>
-      {scene === Scene.MainMenu ? <>
+      {!isInitializedGame ? <div className="bg-[#231f20] fixed h-screen top-0 w-screen" /> : scene === Scene.MainMenu ? <>
         <div className="bg-stone-900 fixed grid h-screen place-items-center top-0 w-screen">
           <div className="flex flex-col gap-8 items-center">
             <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('ジャガイモラン')}</h1>
