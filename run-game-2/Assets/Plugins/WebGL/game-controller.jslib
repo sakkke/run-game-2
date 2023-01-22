@@ -21,8 +21,14 @@ var GameController = {
     StartBackgroundAnimation: function() {
         dispatchReactUnityEvent('StartBackgroundAnimation')
     },
+    StartScoreIncrement: function() {
+        dispatchReactUnityEvent('StartScoreIncrement')
+    },
     StopBackgroundAnimation: function() {
         dispatchReactUnityEvent('StopBackgroundAnimation')
+    },
+    StopScoreIncrement: function() {
+        dispatchReactUnityEvent('StopScoreIncrement')
     }
 }
 

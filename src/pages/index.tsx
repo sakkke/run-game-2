@@ -109,6 +109,7 @@ export default function Home() {
   const [highScore, setHighScore] = useState(0)
   const [score, setScore] = useState(0)
   const [isEnabledBackgroundAnimation, setIsEnabledBackgroundAnimation] = useState(true)
+  const [isEnabledScoreIncrement, setIsEnabledScoreIncrement] = useState(true)
 
   const { t } = useTranslation('common')
 
@@ -270,6 +271,14 @@ export default function Home() {
     setIsEnabledBackgroundAnimation(false)
   }
 
+  const handleStartScoreIncrement = () => {
+    setIsEnabledScoreIncrement(true)
+  }
+
+  const handleStopScoreIncrement = () => {
+    setIsEnabledScoreIncrement(false)
+  }
+
   const resetHighScore = () => {
     setHighScore(h => 0)
   }
@@ -306,7 +315,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    if (scene !== Scene.Game || isGameOver) {
+    if (scene !== Scene.Game || !isEnabledScoreIncrement || isGameOver) {
       return
     }
 
@@ -315,7 +324,7 @@ export default function Home() {
     }, 10)
 
     return () => void clearInterval(id)
-  }, [isGameOver, scene])
+  }, [isEnabledScoreIncrement, isGameOver, scene])
 
   useEffect(() => {
     addEventListener('StartBackgroundAnimation', handleStartBackgroundAnimation)
@@ -325,6 +334,16 @@ export default function Home() {
   useEffect(() => {
     addEventListener('StopBackgroundAnimation', handleStopBackgroundAnimation)
     return () => void removeEventListener('StopBackgroundAnimation', handleStopBackgroundAnimation)
+  })
+
+  useEffect(() => {
+    addEventListener('StartScoreIncrement', handleStartScoreIncrement)
+    return () => void removeEventListener('StartScoreIncrement', handleStartScoreIncrement)
+  })
+
+  useEffect(() => {
+    addEventListener('StopScoreIncrement', handleStopScoreIncrement)
+    return () => void removeEventListener('StopScoreIncrement', handleStopScoreIncrement)
   })
 
   const loadMainMenu = () => {

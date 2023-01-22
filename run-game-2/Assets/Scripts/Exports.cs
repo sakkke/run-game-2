@@ -24,7 +24,13 @@ public class Exports : MonoBehaviour
     public static extern void StartBackgroundAnimation();
 
     [DllImport("__Internal")]
+    public static extern void StartScoreIncrement();
+
+    [DllImport("__Internal")]
     public static extern void StopBackgroundAnimation();
+
+    [DllImport("__Internal")]
+    public static extern void StopScoreIncrement();
 
     // Start is called before the first frame update
     void Start()

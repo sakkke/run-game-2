@@ -111,6 +111,7 @@ public class GameController : MonoBehaviour
 
     public void Pause()
     {
+        Exports.StopScoreIncrement();
         Exports.StopBackgroundAnimation();
         AudioSrc.Pause();
         Time.timeScale = 0;
@@ -119,6 +120,7 @@ public class GameController : MonoBehaviour
 
     public void Resume()
     {
+        Exports.StartScoreIncrement();
         Exports.StartBackgroundAnimation();
         AudioSrc.Play();
         Time.timeScale = 1;
