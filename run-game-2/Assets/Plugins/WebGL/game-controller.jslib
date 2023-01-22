@@ -17,6 +17,12 @@ var GameController = {
     },
     SendSettingsParams: function(json) {
         dispatchReactUnityEvent('SendSettingsParams', UTF8ToString(json))
+    },
+    StartBackgroundAnimation: function() {
+        dispatchReactUnityEvent('StartBackgroundAnimation')
+    },
+    StopBackgroundAnimation: function() {
+        dispatchReactUnityEvent('StopBackgroundAnimation')
     }
 }
 

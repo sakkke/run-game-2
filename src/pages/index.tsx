@@ -108,6 +108,7 @@ export default function Home() {
 
   const [highScore, setHighScore] = useState(0)
   const [score, setScore] = useState(0)
+  const [isEnabledBackgroundAnimation, setIsEnabledBackgroundAnimation] = useState(true)
 
   const { t } = useTranslation('common')
 
@@ -261,6 +262,14 @@ export default function Home() {
     applyLocalSettingsParams()
   }, [])
 
+  const handleStartBackgroundAnimation = () => {
+    setIsEnabledBackgroundAnimation(true)
+  }
+
+  const handleStopBackgroundAnimation = () => {
+    setIsEnabledBackgroundAnimation(false)
+  }
+
   const resetHighScore = () => {
     setHighScore(h => 0)
   }
@@ -307,6 +316,16 @@ export default function Home() {
 
     return () => void clearInterval(id)
   }, [isGameOver, scene])
+
+  useEffect(() => {
+    addEventListener('StartBackgroundAnimation', handleStartBackgroundAnimation)
+    return () => void removeEventListener('StartBackgroundAnimation', handleStartBackgroundAnimation)
+  })
+
+  useEffect(() => {
+    addEventListener('StopBackgroundAnimation', handleStopBackgroundAnimation)
+    return () => void removeEventListener('StopBackgroundAnimation', handleStopBackgroundAnimation)
+  })
 
   const loadMainMenu = () => {
     sendMessage('Game Controller', 'LoadEmpty')
@@ -369,6 +388,7 @@ export default function Home() {
 
           animationName: 'scroll-x',
           animationIterationCount: 'infinite',
+          animationPlayState: isEnabledBackgroundAnimation ? 'running' : 'paused',
           animationTimingFunction: 'linear',
           backgroundImage: 'url(/grass-wide-pixel.png)',
         }}

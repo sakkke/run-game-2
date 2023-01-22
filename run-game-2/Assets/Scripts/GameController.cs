@@ -111,6 +111,7 @@ public class GameController : MonoBehaviour
 
     public void Pause()
     {
+        Exports.StopBackgroundAnimation();
         AudioSrc.Pause();
         Time.timeScale = 0;
         IsPaused = true;
@@ -118,6 +119,7 @@ public class GameController : MonoBehaviour
 
     public void Resume()
     {
+        Exports.StartBackgroundAnimation();
         AudioSrc.Play();
         Time.timeScale = 1;
         IsPaused = false;

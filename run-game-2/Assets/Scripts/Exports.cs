@@ -20,6 +20,12 @@ public class Exports : MonoBehaviour
     [DllImport("__Internal")]
     public static extern void SendSettingsParams(string json);
 
+    [DllImport("__Internal")]
+    public static extern void StartBackgroundAnimation();
+
+    [DllImport("__Internal")]
+    public static extern void StopBackgroundAnimation();
+
     // Start is called before the first frame update
     void Start()
     {
