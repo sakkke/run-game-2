@@ -389,7 +389,16 @@ export default function Home() {
   return (
     <>
       <style>
-        {`@keyframes scroll-x {
+        {`@keyframes enter {
+          from {
+            transform: scale(0);
+          }
+          to {
+            transform: scale(1);
+          }
+        }
+
+        @keyframes scroll-x {
           0% {
             background-position: calc(100vh / 73 * 234) 0;
           }
@@ -429,7 +438,14 @@ export default function Home() {
         />
       </main>
       {!isInitializedGame ? <div className="bg-[#231f20] fixed h-screen top-0 w-screen" /> : scene === Scene.MainMenu ? <>
-        <div className="bg-stone-900 fixed grid h-screen place-items-center top-0 w-screen">
+      <div className="bg-stone-900 fixed h-screen top-0 w-screen" />
+        <div
+          className="bg-stone-900 fixed grid h-screen place-items-center top-0 w-screen"
+          style={{
+            animationDuration: '.2s',
+            animationName: 'enter',
+          }}
+        >
           <div className="flex flex-col gap-8 items-center">
             <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('ジャガイモラン')}</h1>
             <button
