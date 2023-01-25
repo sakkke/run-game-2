@@ -17,7 +17,7 @@ public class PlaneController : MonoBehaviour
     {
         _gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 
-        if (_canSpawn)
+        if (!_gameController.IsMultiplayer && _canSpawn)
         {
             Spawn();
         }
