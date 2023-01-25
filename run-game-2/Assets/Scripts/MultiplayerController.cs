@@ -36,6 +36,11 @@ public class MultiplayerController : MonoBehaviour
 
     public void CreateClient(string clientId)
     {
+        if (Clients.ContainsKey(clientId))
+        {
+            return;
+        }
+
         var vec = new Vector2(GameController.ScreenCenter(), 5);
         var client = Instantiate(_player, vec, Quaternion.identity);
 
