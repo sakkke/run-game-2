@@ -19,10 +19,7 @@ public class PlaneController : MonoBehaviour
 
         if (_canSpawn)
         {
-            foreach (var barrier in _barriers)
-            {
-                barrier.Spawn(_gameController);
-            }
+            Spawn();
         }
     }
 
@@ -34,6 +31,14 @@ public class PlaneController : MonoBehaviour
         if (transform.position.x + halfWidth < GameController.ScreenLeft())
         {
             Destroy(gameObject);
+        }
+    }
+
+    void Spawn()
+    {
+        foreach (var barrier in _barriers)
+        {
+            barrier.Spawn(_gameController);
         }
     }
 }
