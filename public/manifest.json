@@ -1,11 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "Run Game",
-  "short_name": "Run Game",
+  "name": "ジャガイモラン",
+  "short_name": "ジャガイモラン",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#1c1917",
-  "description": "Run Game",
+  "description": "ジャガイモラン",
   "icons": [{
     "src": "icon.png",
     "sizes": "144x144",
