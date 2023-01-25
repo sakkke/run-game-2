@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MultiplayerController : MonoBehaviour
 {
-    enum GameEventType {
+    public enum GameEventType {
         Dive,
         Jump,
         MoveBreak,
@@ -39,7 +39,7 @@ public class MultiplayerController : MonoBehaviour
         Clients[clientId] = client;
     }
 
-    class GameEvent
+    public class GameEvent
     {
         public GameEventType type;
         public string clientId;
