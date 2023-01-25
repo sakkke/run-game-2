@@ -17,6 +17,8 @@ public class MultiplayerController : MonoBehaviour
     [SerializeField]
     GameObject _player;
 
+    public string ClientId { get; set; }
+
     public Dictionary<string, GameObject> Clients;
 
     // Start is called before the first frame update
@@ -36,6 +38,12 @@ public class MultiplayerController : MonoBehaviour
     {
         var vec = new Vector2(GameController.ScreenCenter(), 5);
         var client = Instantiate(_player, vec, Quaternion.identity);
+
+        if (Clients.Count == 0)
+        {
+            ClientId = clientId;
+        }
+
         Clients[clientId] = client;
     }
 
@@ -43,6 +51,11 @@ public class MultiplayerController : MonoBehaviour
     {
         public GameEventType type;
         public string clientId;
+    }
+
+    public void EmitEvent(GameEventType type, string clientId)
+    {
+        Exports.EmitEvent(type, clientId);
     }
 
     public void ParseEvent(string gameEventJson)

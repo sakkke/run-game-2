@@ -6,6 +6,9 @@ using System.Runtime.InteropServices;
 public class Exports : MonoBehaviour
 {
     [DllImport("__Internal")]
+    public static extern void EmitEvent(MultiplayerController.GameEventType type, string clientId);
+
+    [DllImport("__Internal")]
     public static extern void GameOver();
 
     [DllImport("__Internal")]

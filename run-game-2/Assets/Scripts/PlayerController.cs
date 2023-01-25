@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AudioClip _jumpAudioClip;
 
+    MultiplayerController _multiplayerController;
     Rigidbody2D _rigidbody2D;
     SpriteRenderer _spriteRenderer;
     public bool Jumping;
@@ -23,6 +24,11 @@ public class PlayerController : MonoBehaviour
         _gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (_gameController.IsMultiplayer)
+        {
+            _multiplayerController = GameObject.FindWithTag("GameController").GetComponent<MultiplayerController>();
+        }
     }
 
     // Update is called once per frame
@@ -65,9 +71,19 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        if (_gameController.IsMultiplayer && !Jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.K) || Input.GetMouseButtonDown(0)))
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.Jump, _multiplayerController.ClientId);
+        }
+
         if (!_gameController.IsMultiplayer && Jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
         {
             Dive();
+        }
+
+        if (_gameController.IsMultiplayer && Jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.Dive, _multiplayerController.ClientId);
         }
 
         if (!_gameController.IsMultiplayer && !Jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
@@ -79,6 +95,15 @@ public class PlayerController : MonoBehaviour
             StandUp();
         }
 
+        if (_gameController.IsMultiplayer && !Jumping && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.J)))
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.Squat, _multiplayerController.ClientId);
+        }
+        else if (_gameController.IsMultiplayer && !Jumping)
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.StandUp, _multiplayerController.ClientId);
+        }
+
         if (!_gameController.IsMultiplayer && Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H))
         {
             MoveLeft();
@@ -88,6 +113,15 @@ public class PlayerController : MonoBehaviour
             MoveBreak();
         }
 
+        if (_gameController.IsMultiplayer && Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.H))
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.MoveLeft, _multiplayerController.ClientId);
+        }
+        else if (_gameController.IsMultiplayer)
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.MoveBreak, _multiplayerController.ClientId);
+        }
+
         if (!_gameController.IsMultiplayer && Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.L))
         {
             MoveRight();
@@ -95,6 +129,15 @@ public class PlayerController : MonoBehaviour
         else if (!_gameController.IsMultiplayer)
         {
             MoveBreak();
+        }
+
+        if (_gameController.IsMultiplayer && Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.L))
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.MoveRight, _multiplayerController.ClientId);
+        }
+        else if (_gameController.IsMultiplayer)
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.MoveBreak, _multiplayerController.ClientId);
         }
 
         if (Jumping)

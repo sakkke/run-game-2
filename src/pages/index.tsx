@@ -4,10 +4,13 @@ import Modal from 'react-modal'
 import { Inter } from '@next/font/google'
 import { Unity, useUnityContext } from 'react-unity-webgl'
 import type { ChangeEvent } from 'react'
-import { io } from 'socket.io-client'
+import { io, Socket } from 'socket.io-client'
 import { Client } from '@prisma/client'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { DefaultEventsMap } from '@socket.io/component-emitter'
+
+let socket: Socket<DefaultEventsMap, DefaultEventsMap>
 
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
@@ -170,7 +173,7 @@ export default function Home() {
   }
 
   const handleCreateClient = () => {
-    const socket = io('/', { path: '/api/socketio' })
+    socket = io('/', { path: '/api/socketio' })
 
     socket.on('connect', () => {
       (async () => {
@@ -195,56 +198,6 @@ export default function Home() {
     socket.on('remove client', (clientId: string) => {
       sendMessage('Game Controller', 'RemoveClient', clientId)
     })
-
-    const keydownListener = (ev: KeyboardEvent) => {
-      if (ev.key === 'ArrowDown') {
-        const gameEvent = new GameEvent(GameEventType.Dive, socket.id)
-        const json = JSON.stringify(gameEvent)
-        socket.emit('game event', json)
-      }
-
-      if (ev.key === 'ArrowDown') {
-        const gameEvent = new GameEvent(GameEventType.Squat, socket.id)
-        const json = JSON.stringify(gameEvent)
-        socket.emit('game event', json)
-      } else {
-        const gameEvent = new GameEvent(GameEventType.StandUp, socket.id)
-        const json = JSON.stringify(gameEvent)
-        socket.emit('game event', json)
-      }
-
-      if (ev.key === 'ArrowLeft') {
-        const gameEvent = new GameEvent(GameEventType.MoveLeft, socket.id)
-        const json = JSON.stringify(gameEvent)
-        socket.emit('game event', json)
-      }
-
-      if (ev.key === 'ArrowRight') {
-        const gameEvent = new GameEvent(GameEventType.MoveRight, socket.id)
-        const json = JSON.stringify(gameEvent)
-        socket.emit('game event', json)
-      }
-    }
-
-    const keypressListener = (ev: KeyboardEvent) => {
-      if (ev.repeat) {
-        return
-      }
-
-      if (ev.key === 'ArrowUp') {
-        const gameEvent = new GameEvent(GameEventType.Jump, socket.id)
-        const json = JSON.stringify(gameEvent)
-        socket.emit('game event', json)
-      }
-    }
-
-    document.addEventListener('keydown', keydownListener)
-    document.addEventListener('keydown', keypressListener)
-
-    return () => {
-      document.removeEventListener('keydown', keydownListener)
-      document.removeEventListener('keydown', keypressListener)
-    }
   }
 
   const handleIncreaseScore = useCallback((score: number) => {
@@ -283,6 +236,12 @@ export default function Home() {
   const handleInitializeGame = () => {
     setIsInitializedGame(true)
   }
+
+  const handleEmitEvent = useCallback((type: GameEventType, clientId: string) => {
+    const gameEvent = new GameEvent(type, clientId)
+    const json = JSON.stringify(gameEvent)
+    socket.emit('game event', json)
+  }, [])
 
   const resetHighScore = () => {
     setHighScore(h => 0)
@@ -354,6 +313,11 @@ export default function Home() {
   useEffect(() => {
     addEventListener('InitializeGame', handleInitializeGame)
     return () => void removeEventListener('InitializeGame', handleInitializeGame)
+  })
+
+  useEffect(() => {
+    addEventListener('EmitEvent', handleEmitEvent)
+    return () => void removeEventListener('EmitEvent', handleEmitEvent)
   })
 
   const loadMainMenu = () => {

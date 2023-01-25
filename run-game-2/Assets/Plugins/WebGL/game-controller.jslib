@@ -1,4 +1,7 @@
 var GameController = {
+    EmitEvent: function(type, clientId) {
+        dispatchReactUnityEvent('EmitEvent', type, UTF8ToString(clientId))
+    },
     GameOver: function() {
         dispatchReactUnityEvent('GameOver')
     },
