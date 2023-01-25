@@ -398,7 +398,7 @@ export default function Home() {
         <Unity
           unityProvider={unityProvider}
           style={{ visibility: isLoaded ? 'visible' : 'hidden' }}
-          className={`${!isInitializedGame ? 'my-auto z-10' : 'mt-auto'} h-full max-h-screen`}
+          className={`${!isInitializedGame ? 'my-auto z-10' : 'mt-auto'} ${scene === Scene.Multiplayer ? 'w-full' : ''} max-h-screen`}
         />
       </main>
       {!isInitializedGame ? <div className="bg-[#231f20] fixed h-screen top-0 w-screen" /> : scene === Scene.MainMenu ? <>
