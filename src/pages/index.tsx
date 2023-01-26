@@ -415,17 +415,20 @@ export default function Home() {
           }}
         >
           <div className="flex flex-col gap-8 items-center">
-            <h1 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('ジャガイモラン')}</h1>
+            <h1
+              className={`${inter.className} font-black text-stone-50`}
+              style={{ fontSize: 'clamp(1.25rem, 10vw, 8rem)' }}
+            >{t('ジャガイモラン')}</h1>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadGame}
             >{t('Play')}</button>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadMultiplayer}
             >{t('Multiplayer')}</button>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={loadSettings}
             >{t('Settings')}</button>
           </div>
@@ -440,7 +443,10 @@ export default function Home() {
           className="-translate-y-1/2 absolute bg-stone-900/75 grid h-fit left-8 p-8 place-items-center right-8 top-1/2"
         >
           <div className="flex flex-col gap-8 items-center">
-            <h2 className={`${inter.className} font-black text-9xl text-stone-50`}>{t('Game Over!')}</h2>
+            <h2
+              className={`${inter.className} font-black text-stone-50`}
+              style={{ fontSize: 'clamp(1.25rem, 10vw, 8rem)' }}
+            >{t('Game Over!')}</h2>
             <p className={`${inter.className} font-bold text-stone-50`}>
               {t('Current Score')}: {score}
             </p>
@@ -448,11 +454,11 @@ export default function Home() {
               {score > highScore ? t('New High Score') : t('High Score')}: {highScore}
             </p>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={restartGame}
             >{t('Restart')}</button>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-12 hover:bg-stone-600 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
               onClick={exitGame}
             >{t('Main Menu')}</button>
           </div>
