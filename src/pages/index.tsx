@@ -417,7 +417,10 @@ export default function Home() {
           <div className="flex flex-col gap-8 items-center">
             <h1
               className={`${inter.className} font-black text-stone-50`}
-              style={{ fontSize: 'clamp(1.25rem, 10vw, 8rem)' }}
+              style={{
+                fontSize: 'clamp(1.25rem, 10vw, 8rem)',
+                textShadow: '4px 4px #78716c'
+              }}
             >{t('ジャガイモラン')}</h1>
             <button
               className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
