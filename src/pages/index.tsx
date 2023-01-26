@@ -423,15 +423,15 @@ export default function Home() {
               }}
             >{t('ジャガイモラン')}</h1>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 min-w-1/2 p-4 rounded-full text-stone-50`}
               onClick={loadGame}
             >{t('Play')}</button>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 min-w-1/2 p-4 rounded-full text-stone-50`}
               onClick={loadMultiplayer}
             >{t('Multiplayer')}</button>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 min-w-1/2 p-4 rounded-full text-stone-50`}
               onClick={loadSettings}
             >{t('Settings')}</button>
           </div>
@@ -457,11 +457,11 @@ export default function Home() {
               {score > highScore ? t('New High Score') : t('High Score')}: {highScore}
             </p>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 min-w-1/2 p-4 rounded-full text-stone-50`}
               onClick={restartGame}
             >{t('Restart')}</button>
             <button
-              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 p-4 rounded-full text-stone-50 w-1/2`}
+              className={`${inter.className} bg-stone-500 duration-75 font-bold h-auto hover:bg-stone-600 min-h-12 min-w-1/2 p-4 rounded-full text-stone-50`}
               onClick={exitGame}
             >{t('Main Menu')}</button>
           </div>
