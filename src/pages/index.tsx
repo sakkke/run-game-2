@@ -398,7 +398,10 @@ export default function Home() {
       >
         <Unity
           unityProvider={unityProvider}
-          style={{ visibility: isLoaded ? 'visible' : 'hidden' }}
+          style={{
+            filter: isInitializedGame ? 'drop-shadow(2px 4px 6px black)' : 'none',
+            visibility: isLoaded ? 'visible' : 'hidden',
+          }}
           className={`${!isInitializedGame ? 'my-auto z-10' : 'mt-auto'} ${scene === Scene.Multiplayer ? 'w-full' : ''} max-h-screen`}
         />
       </main>
