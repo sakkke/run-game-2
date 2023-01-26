@@ -458,7 +458,7 @@ export default function Home() {
           </div>
         </Modal>
       </> : scene === Scene.Multiplayer ? <>
-        <h2>{t('Multiplayer')}</h2>
+
       </> : scene === Scene.Settings && <>
         <div className="bg-stone-900 fixed grid h-screen overflow-y-scroll p-8 place-items-center top-0 w-screen">
           <div className="flex flex-col gap-8 items-center">
