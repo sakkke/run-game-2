@@ -162,7 +162,7 @@ MonoBehaviour:
   _vectorAx: -10
   _vectorAy: 0
   _vectorBx: 10
-  _vectorBy: 10
+  _vectorBy: 8
 --- !u!114 &375564110515174551
 MonoBehaviour:
   m_ObjectHideFlags: 0
