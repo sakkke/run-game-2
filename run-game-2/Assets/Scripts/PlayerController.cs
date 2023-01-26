@@ -140,6 +140,11 @@ public class PlayerController : MonoBehaviour
             _multiplayerController.EmitEvent(MultiplayerController.GameEventType.MoveBreak, _multiplayerController.ClientId);
         }
 
+        if (_gameController.IsMultiplayer && Input.GetKeyDown(KeyCode.Space))
+        {
+            _multiplayerController.EmitEvent(MultiplayerController.GameEventType.Attack, _multiplayerController.ClientId);
+        }
+
         if (Jumping)
         {
             _animator.SetBool("Jump", true);

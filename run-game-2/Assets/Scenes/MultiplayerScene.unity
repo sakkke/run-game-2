@@ -369,6 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 3993054844321490802, guid: 1698b9c99a034510bbc164d234d87163, type: 3}
+  _playerAttackCircle: {fileID: 8235264448898602019, guid: 3c9994e70a8f7ab93951824838338fa5, type: 3}
 --- !u!82 &1778923021
 AudioSource:
   m_ObjectHideFlags: 0

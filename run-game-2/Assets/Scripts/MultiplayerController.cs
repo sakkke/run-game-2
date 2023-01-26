@@ -12,10 +12,14 @@ public class MultiplayerController : MonoBehaviour
         MoveRight,
         Squat,
         StandUp,
+        Attack,
     }
 
     [SerializeField]
     GameObject _player;
+
+    [SerializeField]
+    GameObject _playerAttackCircle;
 
     public string ClientId { get; set; }
 
@@ -96,7 +100,17 @@ public class MultiplayerController : MonoBehaviour
             case GameEventType.StandUp:
                 PlayerStandUp(ev.clientId);
                 break;
+
+            case GameEventType.Attack:
+                PlayerAttack(ev.clientId);
+                break;
         }
+    }
+
+    public void PlayerAttack(string clientId)
+    {
+        var client = Clients[clientId];
+        Instantiate(_playerAttackCircle, client.transform.position, Quaternion.identity);
     }
 
     public void PlayerDive(string clientId)

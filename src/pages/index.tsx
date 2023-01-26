@@ -33,6 +33,7 @@ enum GameEventType {
   MoveRight,
   Squat,
   StandUp,
+  Attack,
 }
 
 interface IGameEvent {
